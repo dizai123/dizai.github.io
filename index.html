@@ -1,375 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
+extends base
+- var current_title = page.title || tag.name || category.name || site.title
 
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="default">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+block title
+  title= (config.title ? (config.subtitle ? config.title + " | " + config.subtitle : config.title) : "")
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-PHP代码审计-基础知识" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/08/08/PHP代码审计-基础知识/" class="article-date">
-  <time datetime="2018-08-08T03:04:19.000Z" itemprop="datePublished">2018-08-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/08/PHP代码审计-基础知识/">PHP代码审计 基础知识</a>
-    </h1>
-  
+block main
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>本文记录 PHP 代码审计的学习过程</p>
-<p><a href="https://mp.csdn.net/mdeditor/81107149" target="_blank" rel="noopener">PHP 代码审计博客目录</a></p>
-</blockquote>
-<h1 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1. 环境准备"></a>1. 环境准备</h1><h2 id="1-1-测试运行环境"><a href="#1-1-测试运行环境" class="headerlink" title="1.1 测试运行环境"></a>1.1 测试运行环境</h2><p>安装 wamp</p>
-<h2 id="1-2-PHP-编写工具"><a href="#1-2-PHP-编写工具" class="headerlink" title="1.2 PHP 编写工具"></a>1.2 PHP 编写工具</h2><ol>
-<li>EditPlu</li>
-<li>Notepad++</li>
-<li>Zendstudio 10 <a href="https://pan.baidu.com/s/1ZLITLQh0zsXcVlTx-wsZRA?fid=1082316314302126" target="_blank" rel="noopener">百度云下载链接</a></li>
-</ol>
-<h2 id="1-3-代码审计工具"><a href="#1-3-代码审计工具" class="headerlink" title="1.3 代码审计工具"></a>1.3 代码审计工具</h2><p>Seay源代码审计系统 <a href="https://pan.baidu.com/s/1skEE2Bz?fid=143632393324465" target="_blank" rel="noopener">百度云下载链接</a></p>
-<h2 id="1-4-代码审计平台"><a href="#1-4-代码审计平台" class="headerlink" title="1.4 代码审计平台"></a>1.4 代码审计平台</h2><ol>
-<li>DVWA <a href="https://github.com/ethicalhack3r/DVWA" target="_blank" rel="noopener">GitHub 链接</a></li>
-<li>ZVulDrill <a href="https://github.com/710leo/ZVulDrill" target="_blank" rel="noopener">GitHub 链接</a></li>
-</ol>
-<h1 id="2-注释"><a href="#2-注释" class="headerlink" title="2. 注释"></a>2. 注释</h1><ol>
-<li>单行注释 =&gt;  //单行注释</li>
-<li>多行注释 =&gt;  /*多行注释*/</li>
-</ol>
-<h1 id="3-单引号和双引号"><a href="#3-单引号和双引号" class="headerlink" title="3. 单引号和双引号"></a>3. 单引号和双引号</h1><ol>
-<li><p>单引号不解析变量</p>
-</li>
-<li><p>双引号解析变量</p>
-<p>aaa=’123’</p>
-<pre><code>echo &apos;$aaa&apos; =&gt; 结果为 $aaa
-echo &quot;$aaa&quot; =&gt; 结果为 123
-</code></pre></li>
-</ol>
-<h1 id="4-输出函数"><a href="#4-输出函数" class="headerlink" title="4. 输出函数"></a>4. 输出函数</h1><ol>
-<li>echo 或者 print：最简单的输出方法</li>
-<li>print_r、var_dump(var_export)、debug_zval_dump：输出变量数据值，特别是数组和对象数据</li>
-<li>var_dump 会额外输出数据类型</li>
-<li>print_r：输出格式很整齐，跟var_dump 的区别是没有类型数据，并且布尔值的 false 和 NULL 输出为空</li>
-<li>var_export：所有的数据是可以作为组织好的变量输出的，都是能够作为直接赋值使用；需要注意的一点是, var_export 对于资源型的变量会输出NULL</li>
-<li>debug_zval_dump：输出结果跟 var_dump 类似，唯一增加的一个值是 refcount，就是记录一个变量被引用了多少次，这是 php 的copy on write (写时复制) 的机制的一个重要特点。</li>
-</ol>
-<h1 id="5-超全局变量"><a href="#5-超全局变量" class="headerlink" title="5. 超全局变量"></a>5. 超全局变量</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">超全局变量——超全局变量是在全部作用域中始终可用的内置变量</span><br></pre></td></tr></table></figure>
-<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><ol>
-<li><p>在php 中可由用户操作的全局变量列表如下:</p>
-<p>$GLOBALS — 引用全局作用域中可用的全部变量</p>
-<pre><code>$_SERVER — 服务器和执行环境信息
-$_GET — HTTP GET 变量
-$_POST — HTTP POST 变量
-$_FILES — HTTP 文件上传变量
-$_REQUEST — HTTP Request 变量
-$_SESSION — Session 变量
-$_ENV — 环境变量
-$_COOKIE — HTTP Cookies
-</code></pre></li>
-<li><p>已经被弃用的超全局变量</p>
-<p>$_HTTP_COOKIE_VARS</p>
-<pre><code>$_HTTP_ENV_VARS
-$_HTTP_GET_VARS
-$_HTTP_POST_FILES
-$_HTTP_POST_VARS
-$_HTTP_SERVER_VARS
-</code></pre></li>
-</ol>
-<h2 id="2-超全局变量示例"><a href="#2-超全局变量示例" class="headerlink" title="2. 超全局变量示例"></a>2. 超全局变量示例</h2><ol>
-<li><p>$GLOBALS</p>
-<h1 id="例一："><a href="#例一：" class="headerlink" title="例一："></a>例一：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$moon=&quot;1&quot;;</span><br><span class="line">echo $GLOBALS[&apos;moon&apos;];</span><br><span class="line">?&gt;</span><br><span class="line"># 显示结果为1</span><br><span class="line"></span><br><span class="line"># 例二</span><br><span class="line">&lt;?php</span><br><span class="line">function test()&#123;</span><br><span class="line">	echo $moon=&quot;2&quot;;</span><br><span class="line">	echo $GLOBALS[&apos;moon&apos;];</span><br><span class="line">&#125;</span><br><span class="line">$moon=&quot;1&quot;;</span><br><span class="line">test();</span><br><span class="line">?&gt;</span><br><span class="line"># 显示结果为 21 </span><br><span class="line"># 函数内部为局部变量，不被 $GLOBALS 所识别</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>$_SERVER</p>
-<p>test1.php</p>
-<pre><code>&lt;?php
-print_r($_SERVER);
-?&gt;
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test2.php</span><br><span class="line">	&lt;?php</span><br><span class="line">	$_SERVER=&apos;aaaaaa&apos;;</span><br><span class="line">	print_r($_SERVER);</span><br><span class="line">	?&gt;</span><br></pre></td></tr></table></figure>
-<p>输出结果为服务器的配置信息</p>
-<p><img src="https://i.imgur.com/NxGTsQ1.png" alt=""></p>
-<p>输出结果可以被覆盖</p>
-<p><img src="https://i.imgur.com/W6GgqVz.png" alt=""></p>
-</li>
-<li><p>$_GET</p>
-<p>test.php</p>
-<pre><code>&lt;?php
-print_r($_GET);
-?&gt;
-</code></pre><p>输出结果为 URL 中的 GET 变量的数据</p>
-<p><img src="https://i.imgur.com/30xFhlN.png" alt=""></p>
-</li>
-<li><p>$_POST</p>
-<p>test.php</p>
-<pre><code>&lt;?php
-print_r($_POST);
-?&gt;
-</code></pre><p>输出结果为 URL 中的 POET 变量的数据</p>
-</li>
-<li><p>$_FILES</p>
-<ol>
-<li>file.html<br><form action="test.php" method="post" enctype="multipart/form-data"><pre><code>&lt;lable for=&quot;file&quot;&gt;Filename:&lt;/lable&gt;
-&lt;input type=&quot;file&quot; name=&quot;file&quot; id=&quot;file&quot; /&gt;
-&lt;br /&gt;
-&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
-&lt;/form&gt;
-</code></pre><ol>
-<li>test.php<br>&lt;?php<br>print_r($_FILES);<br>?&gt;</li>
-</ol>
-</form></li>
-</ol>
-<p>输出结果为提交的文件的信息</p>
-<p><img src="https://i.imgur.com/0aqkmXB.png" alt=""></p>
-</li>
-<li><p>$_REQUEST</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">	test1.php</span><br><span class="line">		&lt;?php</span><br><span class="line">		print_r($_REQUEST);</span><br><span class="line">		?&gt;</span><br><span class="line"></span><br><span class="line">	test2.php</span><br><span class="line">		&lt;?php</span><br><span class="line">		$_REQUEST=&apos;aaaaaa&apos;;</span><br><span class="line">		print_r($_REQUEST);</span><br><span class="line">		?&gt;</span><br><span class="line"></span><br><span class="line">输出结果可以被覆盖</span><br><span class="line"></span><br><span class="line">![](https://i.imgur.com/W6GgqVz.png)</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>$_SESSION</p>
-<p>test1.php</p>
-<pre><code>&lt;?php
-print_r($_SESSION);
-?&gt;
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test2.php</span><br><span class="line">	&lt;?php</span><br><span class="line">	$_SESSION=&apos;aaaaaa&apos;;</span><br><span class="line">	print_r($_SESSION);</span><br><span class="line">	?&gt;</span><br></pre></td></tr></table></figure>
-<p>输出结果可以被覆盖</p>
-<p><img src="https://i.imgur.com/W6GgqVz.png" alt=""></p>
-</li>
-<li><p>$_ENV</p>
-<p>test1.php</p>
-<pre><code>&lt;?php
-print_r($_ENV);
-?&gt;
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">test2.php</span><br><span class="line">	&lt;?php</span><br><span class="line">	$_ENV=&apos;aaaaaa&apos;;</span><br><span class="line">	print_r($_ENV);</span><br><span class="line">	?&gt;</span><br><span class="line"></span><br><span class="line">test3.php</span><br><span class="line">	&lt;?php</span><br><span class="line">	print_r($_ENV[&apos;OS&apos;]=&apos;bbbbbb&apos;);</span><br><span class="line">	?&gt;</span><br></pre></td></tr></table></figure>
-<p>输出结果可以被覆盖</p>
-<p><img src="https://i.imgur.com/W6GgqVz.png" alt=""></p>
-<p><img src="https://i.imgur.com/XROLZ85.png" alt=""></p>
-</li>
-<li><p>$_COOKIE </p>
-<p>test.php</p>
-<pre><code>&lt;?php
-print_r($_COOKIE);
-?&gt;
-</code></pre><p>输出结果为 cookie 值</p>
-</li>
-</ol>
+  article
+    #index-main.container.entries
+      for post in page.posts.toArray()
+        .post-entry
+          .post-time= post.date.format(config.date_format)
+          .post-desc
+            .post-title
+              if post.link
+                  a(href=url_for(post.link),target="_blank", itemprop="url")= post.title
+              else
+                  a(href=url_for(post.path))= post.title
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/08/PHP代码审计-基础知识/" data-id="cjkkwboib0000egfuomo7l71l" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+            .post-content
+              if post.description
+                != post.description
+              else if post.excerpt
+                != post.excerpt
+              else if post.content
+                - var br = post.content.indexOf('</p>')
+                if br < 0
+                  != post.content
+                else
+                  != post.content.substring(0, br + 4)
 
-    </footer>
-  </div>
-  
-</article>
+            .post-meta
+              if (post.tags && post.tags.length)
+                .post-tags
+                  != list_tags(post.tags, {show_count: false, class: 'post-tag', style:'none', separator:'/'})
+              if (post.categories && post.categories.length)
+                .post-categories
+                  != list_categories(post.categories, {show_count: false, class: 'post-category', style: 'none', separator: '>'})
 
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/28/hello-world/" class="article-date">
-  <time datetime="2018-07-28T11:36:36.393Z" itemprop="datePublished">2018-07-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/28/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/28/hello-world/" data-id="cjkkwbol20005egfueaoctdac" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/代码审计/" style="font-size: 10px;">代码审计</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/08/08/PHP代码审计-基础知识/">PHP代码审计 基础知识</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/28/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-
-
-  </div>
-</body>
-</html>
+  include _partial/paginator.jade
