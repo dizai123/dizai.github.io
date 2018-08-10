@@ -92,6 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/images/pasted-19.png">
 <meta property="og:image" content="http://yoursite.com/images/pasted-20.png">
 <meta property="og:image" content="http://yoursite.com/images/pasted-21.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-34.png">
 <meta property="og:image" content="http://yoursite.com/images/pasted-22.png">
 <meta property="og:image" content="http://yoursite.com/images/pasted-23.png">
 <meta property="og:image" content="http://yoursite.com/images/pasted-25.png">
@@ -103,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/images/pasted-31.png">
 <meta property="og:image" content="http://yoursite.com/images/pasted-32.png">
 <meta property="og:image" content="http://yoursite.com/images/pasted-33.png">
-<meta property="og:updated_time" content="2018-08-10T10:38:33.822Z">
+<meta property="og:updated_time" content="2018-08-10T11:52:14.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次XorDDos木马的清除">
 <meta name="twitter:description" content="【前言】 一种名为“XOR.DDoS”的新型木马出现，该木马能够感染32位和64位的Linux系统，通过安装rootkit来隐藏自身，并可通过DDoS攻击形成僵尸网络。XOR.DDoS木马原理是杀毒软件公司Avast在它们的博客中解释了这种新的威胁，该木马可以根据目标Linux系统环境的不同来相应调整安装方式，并安装一个rootkit来躲避杀毒软件的检测。黑客首先通过SSH暴力登录目标Linux系">
@@ -353,7 +354,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,090
+                  1,093
                 </span>
               
 
@@ -400,8 +401,8 @@
 <h3 id="0x03-【杀马全过程】"><a href="#0x03-【杀马全过程】" class="headerlink" title="0x03 【杀马全过程】"></a>0x03 【杀马全过程】</h3><p>1.发现cpu使用超高、网络流量异常、服务器还会出现卡顿现象。<br>通过top发现会有几个可疑的程序占用了CPU。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top</span><br></pre></td></tr></table></figure></p>
 <p><img src="/images/pasted-20.png" alt="upload successful"></p>
 <p>2.执行tcpdump -i ens33后发现网络的流量异常，不断在往外发送请求。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i ens33</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/pasted-21.png" alt="upload successful"><br>3.通过lsof -i 看到了一个可疑的服务，PID为1657。</p>
-<p>4.尝试着杀掉这个进程 kill -9 1657，发现又起了另一个服务进程，猜测这个木马会不断的改名自启。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 1657</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/pasted-21.png" alt="upload successful"><br>3.通过lsof -i 看到了一个可疑的服务，PID为1657。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -i</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/pasted-34.png" alt="upload successful"><br>4.尝试着杀掉这个进程 kill -9 1657，发现又起了另一个服务进程，猜测这个木马会不断的改名自启。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 1657</span><br></pre></td></tr></table></figure></p>
 <p><img src="/images/pasted-22.png" alt="upload successful"><br><strong>查杀思路：<br>由于运行进程有多个相互保护（参考一下pstree），而且和病毒文件直接也是相互配合，如果直接删除也会重新生成一个新的病毒文件，所以查杀的基本的思路是：删除定时任务中的病毒启动—&gt;破坏病毒文件使其不可执行（不要删除，否会自动生成）—&gt;停止系统病毒进程—&gt;删除病毒文件—&gt;清理感染文件—&gt;关闭病毒开机启动<br>以下查杀可以自由组合，按上面查杀思路排列即可！</strong></p>
 <p>5.查看木马进程的位置。(proc之后跟的数字文件就是程序的PID)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ll /proc/9257</span><br></pre></td></tr></table></figure></p>
 <p><img src="/images/pasted-23.png" alt="upload successful"><br>我们还可以尝试使用rkhunter或chkrootkit工具看看有哪些文件被木马篡改过。步骤略。</p>
