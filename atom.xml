@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-15T02:50:08.302Z</updated>
+  <updated>2018-08-15T15:29:07.036Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CentOS 下 LNMP 环境配置（yum安装）</title>
+    <link href="http://yoursite.com/2018/08/15/CentOS-%E4%B8%8B-LNMP-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88yum%E5%AE%89%E8%A3%85%EF%BC%89/"/>
+    <id>http://yoursite.com/2018/08/15/CentOS-下-LNMP-环境配置（yum安装）/</id>
+    <published>2018-08-15T15:11:42.000Z</published>
+    <updated>2018-08-15T15:29:07.036Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>LNMP 环境代表 Linux 系统下 Nginx + MySQL + PHP 网站服务器架构。</p><p>Linux是一类Unix计算机操作系统的统称，是目前最流行的免费操作系统。代表版本有：debian、centos、ubuntu、fedora、gentoo等。</p><a id="more"></a><p>Nginx是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP代理服务器。</p><p>Mysql是一个小型关系型数据库管理系统。</p><p>PHP是一种在服务器端执行的嵌入HTML文档的脚本语言。</p><p>这四种软件均为免费开源软件，组合到一起，成为一个免费、高效、扩展性强的网站服务系统。</p><h3 id="安装配置-Nginx"><a href="#安装配置-Nginx" class="headerlink" title="安装配置 Nginx"></a>安装配置 Nginx</h3><p><strong>自动安装 Nginx。输入命令：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">yum install nginx systemctl start nginx</span><br></pre></td></tr></table></figure></p><p><strong>浏览器中测试 Nginx 服务是否正常运行。访问 CentOS 云服务器公网 IP。</strong></p><p><img src="/images/LNMP/1.png" alt="upload successful"></p><h3 id="安装配置-MySQL"><a href="#安装配置-MySQL" class="headerlink" title="安装配置 MySQL"></a>安装配置 MySQL</h3><p><strong>注意：</strong></p><p><strong>从 CentOS 7 系统开始，MariaDB 成为 yum 源中默认的数据库安装包。在 CentOS 7 及以上的系统中使用 yum 安装 MySQL 包将无法使用 MySQL。您可以选择使用完全兼容的 MariaDB，或自行安装较低版本的 MySQL。</strong></p><p><strong>安装 MySQL。输入以下命令：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb mariadb-server</span><br></pre></td></tr></table></figure></p><p><strong>启动 MySQL 服务。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mariadb.service</span><br></pre></td></tr></table></figure></p><p><strong>登录 MySQL ，删除空用户</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; select user,host,password from mysql.user;</span><br><span class="line">MariaDB [(none)]&gt; select user,host,password from mysql.user;</span><br></pre></td></tr></table></figure></p><p><img src="/images/LNMP/2.png" alt="upload successful"></p><p><strong>修改 root 密码。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; update mysql.user set password = (&apos;toor&apos;) where user=&apos;root&apos;</span><br><span class="line">MariaDB [(none)]&gt; flush privileges;</span><br></pre></td></tr></table></figure></p><p><img src="/images/LNMP/3.png" alt="upload successful"></p><h3 id="安装配置-PHP"><a href="#安装配置-PHP" class="headerlink" title="安装配置 PHP"></a>安装配置 PHP</h3><p><strong>安装 PHP 。输入命令进行安装：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install php lighttpd-fastcgi php-cli php-mysql php-gd php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-mssql php-snmp php-soap</span><br></pre></td></tr></table></figure></p><p><strong>安装所需组件使 PHP 支持 MySQL、FastCGI 模式。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install  php-tidy php-common php-devel php-fpm php-mysql</span><br></pre></td></tr></table></figure></p><h4 id="Nginx-与-PHP-FPM-集成"><a href="#Nginx-与-PHP-FPM-集成" class="headerlink" title="Nginx 与 PHP-FPM 集成"></a>Nginx 与 PHP-FPM 集成</h4><p><strong>启动 PHP-FPM。输入命令启动 PHP-FPM 服务</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service php-fpm start 。</span><br></pre></td></tr></table></figure></p><p><strong>输入命令查看 PHP-FPM 默认配置</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/php-fpm.d/www.conf |grep -i &apos;listen =&apos;</span><br></pre></td></tr></table></figure></p><p>返回结果为：listen = 127.0.0.1:9000，表明 PHP-FPM 默认配置的监听端口为 9000，只需修改配置，将 PHP 解析的请求转发到 127.0.0.0:9000 处理即可。</p><p><img src="/images/LNMP/4.png" alt="upload successful"></p><p><strong>修改 Nginx 配置。</strong></p><p><strong>输入命令查找 Nginx 配置文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></table></figure></p><p><strong>使用vi命令修改该配置文件：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure></p><p><strong>修改红框里面的内容。</strong></p><p><img src="/images/LNMP/5.png" alt="upload successful"></p><p> <strong>配置完成后，重启服务。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></table></figure></p><p><strong>环境配置验证</strong></p><p><strong>用以下命令在 web 目录下创建 index.php：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/share/nginx/html/index.php</span><br><span class="line"></span><br><span class="line">&lt;?php echo &quot;&lt;title&gt;Test Page&lt;/title&gt;&quot;; echo &quot;hello world&quot;; ?&gt;</span><br></pre></td></tr></table></figure></p><p><img src="/images/LNMP/6.png" alt="upload successful"></p><p><strong>验证：在浏览器中输入服务器ip:index.php，出现hello world页面，说明配置成功。</strong></p><p><img src="/images/LNMP/7.png" alt="upload successful"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;LNMP 环境代表 Linux 系统下 Nginx + MySQL + PHP 网站服务器架构。&lt;/p&gt;
+&lt;p&gt;Linux是一类Unix计算机操作系统的统称，是目前最流行的免费操作系统。代表版本有：debian、centos、ubuntu、fedora、gentoo等。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="搭建服务" scheme="http://yoursite.com/categories/%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+      <category term="LNMP" scheme="http://yoursite.com/tags/LNMP/"/>
+    
+      <category term="ngixn" scheme="http://yoursite.com/tags/ngixn/"/>
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+      <category term="PHP" scheme="http://yoursite.com/tags/PHP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用Docker一分钟搭建WordPress博客</title>
+    <link href="http://yoursite.com/2018/08/15/%E7%94%A8Docker%E4%B8%80%E5%88%86%E9%92%9F%E6%90%AD%E5%BB%BAWordPress%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://yoursite.com/2018/08/15/用Docker一分钟搭建WordPress博客/</id>
+    <published>2018-08-15T12:42:58.000Z</published>
+    <updated>2018-08-15T12:57:28.252Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="0x01-【前言】"><a href="#0x01-【前言】" class="headerlink" title="0x01 【前言】"></a>0x01 【前言】</h3><p>WordPress是一个非常著名的PHP编写的博客平台，发展到目前为止已经形成了一个庞大的网站平台系统。在WP上有规模庞大的插件和主题，可以帮助我们快速建立一个博客甚至网站。</p><a id="more"></a><p>在Windows上可以非常方便的安装WordPress，因为IIS上集成了WordPress的一键安装包。而在Linux上安装WordPress就比较复杂了，我们需要配置PHP环境、Apache或者Nginx服务器、MySQL数据库以及各种权限和访问问题。所以在Linux上最好的办法就是使用Docker来安装WordPress。</p><p><img src="/images/博客搭建/1.png" alt="upload successful"></p><h3 id="0x02-【安装环境】"><a href="#0x02-【安装环境】" class="headerlink" title="0x02 【安装环境】"></a>0x02 【安装环境】</h3><p>CentOS Linux release 7.5.1804(Core)</p><h3 id="0x03-【安装步骤】"><a href="#0x03-【安装步骤】" class="headerlink" title="0x03 【安装步骤】"></a>0x03 【安装步骤】</h3><h4 id="一、安装Docker"><a href="#一、安装Docker" class="headerlink" title="一、安装Docker"></a>一、安装Docker</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum update -y</span><br><span class="line"></span><br><span class="line">yum -y install docker</span><br><span class="line"></span><br><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure><p><strong>验证安装</strong></p><p>docker version</p><p><img src="/images/博客搭建/2.png" alt="upload successful"></p><p><strong>配置Docker</strong></p><p><strong>设置镜像</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"> &quot;registry-mirrors&quot;: [&quot;https://aj2rgad5.mirror.aliyuncs.com&quot;]</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p><strong>重启Docker</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line"></span><br><span class="line">systemctl restart docker.service</span><br></pre></td></tr></table></figure></p><h4 id="二、安装WordPress"><a href="#二、安装WordPress" class="headerlink" title="二、安装WordPress"></a>二、安装WordPress</h4><p>有了Docker，安装WordPress就很简单了，直接一条命令搞定。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull wordpress:latest</span><br></pre></td></tr></table></figure></p><h4 id="三、安装MySQL"><a href="#三、安装MySQL" class="headerlink" title="三、安装MySQL"></a>三、安装MySQL</h4><p>WordPress需要使用MySQL数据库，这里也有两种方式，第一种是安装本地MySQL，第二种就是在Docker中安装MySQL镜像。如果要在Docker中安装MySQL也非常简单，同样一条命令搞定。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:latest</span><br></pre></td></tr></table></figure></p><p>启动MySQL使用下面的命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag</span><br></pre></td></tr></table></figure></p><p>name参数指定要启动的实例名称，MYSQL_ROOT_PASSWORD指定ROOT密码。tag参数是MySQL的版本号，可以是5.7、5.6、8.0</p><h4 id="四、配置WordPress"><a href="#四、配置WordPress" class="headerlink" title="四、配置WordPress"></a>四、配置WordPress</h4><p>安装好数据库之后，就可以启动WordPress了。详细的文档参考<a href="https://hub.docker.com/r/library/wordpress/" target="_blank" rel="noopener">这里</a>。如果使用Docker中安装的MySQL实例，使用下面的命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name some-wordpress --link some-mysql:mysql -p 8080:80 -d wordpress</span><br></pre></td></tr></table></figure></p><p>name参数指定要启动的WordPress实例名称，link参数指定要使用的Docker MySQL实例名称，p参数将Docker内部的80端口映射到本地的8080端口上。</p><h4 id="五、检测"><a href="#五、检测" class="headerlink" title="五、检测"></a>五、检测</h4><p>然后打开浏览器，输入localhost:8080（端口号是命令中设置的），然后就可以看到WordPress了。按照提示输入用户名等信息，然后安装WordPress。等到它提示安装完成，那么WordPress的安装就算大功告成了。</p><p>最后稍加配置，再添加诸如内网映射等功能之后，站点就可以对外访问了。</p><p><img src="/images/博客搭建/3.png" alt="upload successful"></p><h3 id="0x04-参考文献："><a href="#0x04-参考文献：" class="headerlink" title="0x04 参考文献："></a>0x04 参考文献：</h3><p><a href="https://blog.csdn.net/u011054333/article/details/70136099" target="_blank" rel="noopener">https://blog.csdn.net/u011054333/article/details/70136099</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;0x01-【前言】&quot;&gt;&lt;a href=&quot;#0x01-【前言】&quot; class=&quot;headerlink&quot; title=&quot;0x01 【前言】&quot;&gt;&lt;/a&gt;0x01 【前言】&lt;/h3&gt;&lt;p&gt;WordPress是一个非常著名的PHP编写的博客平台，发展到目前为止已经形成了一个庞大的网站平台系统。在WP上有规模庞大的插件和主题，可以帮助我们快速建立一个博客甚至网站。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="搭建博客" scheme="http://yoursite.com/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+      <category term="博客，mysql，wordpress" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2%EF%BC%8Cmysql%EF%BC%8Cwordpress/"/>
+    
+  </entry>
   
   <entry>
     <title>sqlmap基本使用</title>
@@ -153,9 +204,9 @@
       <category term="代码审计" scheme="http://yoursite.com/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
     
     
-      <category term="代码审计" scheme="http://yoursite.com/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
-    
       <category term="PHP" scheme="http://yoursite.com/tags/PHP/"/>
+    
+      <category term="代码审计" scheme="http://yoursite.com/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
     
   </entry>
   
