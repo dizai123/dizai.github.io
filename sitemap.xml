@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/08/15/sqlmap%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</loc>
+    
+    <lastmod>2018-08-15T02:50:08.302Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/08/15/Burp-Suite%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%86/</loc>
+    
+    <lastmod>2018-08-15T02:38:49.226Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/08/12/Web-%E5%AE%89%E5%85%A8-PHP-%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5%E4%B9%8B%E5%B8%B8%E8%A7%84%E6%BC%8F%E6%B4%9E/</loc>
     
     <lastmod>2018-08-14T08:01:25.343Z</lastmod>
