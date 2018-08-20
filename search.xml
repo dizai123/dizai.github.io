@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[AppScan工具基本使用]]></title>
+    <url>%2F2018%2F08%2F20%2FAppScan%E5%B7%A5%E5%85%B7%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[0x01 【前言】Ratinal AppScan其实是一个产品家族，包括众多的应用安全扫描产品。从开发阶段的源代码扫描的 AppScan source edition，到针对 Web 应用进行快速扫描的 AppScan standard edition，以及进行安全管理和汇总整合的 AppScan enterprise Edition 等。我们经常说的 AppScan 就是指的桌面版本的 AppScan，即 AppScan standard edition。其安装在 Windows 操作系统上，可以对网站等 Web 应用进行自动化的应用安全扫描和测试。 AppScan工作原理小结如下： 通过搜索（爬行）发现整个 Web 应用结构 根据分析，发送修改的 HTTP Request 进行攻击尝试（扫描规则库） 通过对于 Respone 的分析验证是否存在安全漏洞 AppScan扫描原理：扫描规则库+爬行+测试 AppScan 的核心是提供一个扫描规则库，然后利用自动化的“探索”技术得到众多的页面和页面参数，进而对这些页面和页面参数进行安全性测试。“扫描规则库”，“探索”，“测试”就构成了 AppScan 的核心三要素。而在安全扫描过程中，如何进行优化，就要结合这三个要素，看哪些部分需要优化，应该如何优化。 0x02 【使用步骤】1、打开AppScan软件，点击工具栏上的文件，新建，出现一个dialog。 2、点击“Regular Scan”。出现扫描配置向导页面，这里是选择“AppScan”，如图： 3、输入扫描项目目标URL 4、点击“下一步”，选择认证模式，出现登录管理的页面，这是因为对于大部分网站，需要用户名和密码登录进去才可以查看许多内容，未登录的情况下就只可以访问部分页面。 5、点击“下一步”，出现测试策略的页面，可以根据不同的测试需求进行选择6、点击“下一步”，出现完成配置向导的界面，这里使用默认配置，可根据需求更改。 7、点击“完成”，设置保存路径，即开始扫描。 0x03 扫描结果 红色叹号表示高危漏洞，每一个漏洞都有详细的列出来，工具栏中的”报告“，可以将扫描结果导出来。 0x04 【参考资料】http://www.mamicode.com/info-detail-1879133.html http://www.360doc.com/content/17/0219/20/32626470_630367925.shtml]]></content>
+      <categories>
+        <category>安全工具</category>
+      </categories>
+      <tags>
+        <tag>AppScan</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[AWVS的基本使用]]></title>
+    <url>%2F2018%2F08%2F20%2FAWVS%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[0x01 【前言】Acuneti Webb Vulnerability Scanner是一款知名的Web网络漏洞扫描工具，它通过网络爬虫测试你的网站安全，检测流行安全漏洞。现已更新到11，下面介绍9版本。 0x02 【功能or特点】自动的客户端脚本分析器，允许对Ajax和Web 2.0应用程序进行安全性测试。 业内最先进且深入的SQL注入和跨站脚本测试； 高级渗透测试工具，例如HTTP Editor和HTTP Fuzzer； 可视化宏记录器帮助您轻松测试web表格和受密码保护的区域 支持含有 CAPTHCA 的页面，单个开始指令和 Two Factor（双因素）验证 机制 丰富的报告功能，包括 VISA PCI 依从性报告 高速的多线程扫描器轻松检索成千上万个页面 智能爬行程序检测 web 服务器类型和应用程序语言 Acunetix检索并分析网站，包括 flash 内容、SOAP 和 AJAX 端口扫描 web 服务器并对在服务器上运行的网络服务执行安全检查 可导出网站漏洞文件 0x03 AWVS menus bar（AWVS菜单栏） 0x04 AWVS工具栏从左到右分别是：新建扫描——网站扫描——网站爬行——目标查找——目标探 测——子域名扫描——SQL盲注——HTTP编辑——HTTP嗅 探——HTTP Fuzzer——认证测试——结果对比——WSDL扫 描——WSDL编辑测试——程序设置——扫描设置——侧重扫 描设置——计划任务——报告 0x05 AWVS 新建扫描1、点击菜单栏的 New Scan 新建一次扫描， 网站扫描开始前，需要 设定下面选项: （1). Scan type （2). Options （3). Target （4). Login （5). Finsh AWVS 新建扫描——Scan type AWVS 新建扫描——Options 接着，点击下一步按钮，在scanning profile里面选择安全扫面的漏洞种类（其实就是payload） Options——Scanning profile Scanning profile： 设置侧重扫描的类型，包含16种侧 重检测类型 AWVS 新建扫描——Target AWVS 新建扫描——Login 这个Login sequence，我要讲一下，当你的网站需要深入扫描的时候，我们就可以使用这个Login sequence功能，这个功能通过你输入网站的用户名密码登录之后，AWVS就可以扫描登录以后的权限页面，如果你不登录，那么，AWVS就没有权限扫描需要用户名密码登录之后的页面了（因为这些页面都需要特定的权限验证之后才能访问，所以，我把他们叫做权限页面），如果保持默认设置，那么AWVS就无权扫描你的权限页面，此处，我们使用默认设置就好了，点击下一步，来到完成设置页面。 AWVS 新建扫描——Finish 点击Finish，完成AWVS的扫描设置（点击Finish按钮之前，AWVS还未进行任何的安全扫描），当点击Finish按钮之后，AWVS就开始对你提供的域名（或者IP亦可）进行安全扫描了。 0x06 扫描结果 可以看到，右边，process=100.0%，看来安全扫描全部进行完毕，而process上面已经说的很清楚了，红色感叹号代表高危漏洞，黄色的感叹号代表中危漏洞，蓝色感叹号代表低危漏洞，绿色感叹号代表信息泄露，其实，我们在做渗透测试的大多数时候，只需要关注高危漏洞就可以了。 0x07 结果导出 主界面——Scanning Profiles scripts 主界面——Scan Setting 批量扫描 Acunetix的计划任务，主要特性如下:（a). 可用于大量扫描，扫描结果保存在“C:\Users\Public\Documents\AcunetixWVS 10\Saves”。 （b). 扫描结束，可以使用邮件通知。 （c). 可设定计划时间，什么时候允许扫描，什么时候不允许扫描 蜘蛛爬行功能 目标探测工具（Target Finder） 子域名探测工具（Subdomain Scanner） SQL盲注测试工具（Blind SQL Injection） ➢AWVS的HTTP嗅探工具（HTTP Sniffer） ➢AWVS的HTTP模糊测试工具（HTTP Fuzzer） ➢AWVS的认证测试工具（Authentication Tester） ➢AWVS的WEB WSDL扫描测试工具（Web Services Scanner、 Web Services Editor） 0x08 参考文献https://blog.csdn.net/lynnlinlin/article/details/52947526]]></content>
+      <categories>
+        <category>安全工具</category>
+      </categories>
+      <tags>
+        <tag>AWVS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[查杀"一路赚钱木马"]]></title>
     <url>%2F2018%2F08%2F20%2F%E6%9F%A5%E6%9D%80%E4%B8%80%E8%B7%AF%E8%B5%9A%E9%92%B1%E6%9C%A8%E9%A9%AC%2F</url>
     <content type="text"><![CDATA[0x01 【准备工作】虚拟机的网络适配器选择NAT连接，防止感染物理主机。 植入木马：将mservice.sh的执行文件放在根（/）目录下 执行脚本开始挣钱：1sudo bash mservice.sh 55138 //55138为自己的一路挣钱ID号 0x02 【查找木马】1.通过查看top 看到CPU占有197.7% （2个CPU） 2.通过lsof -p 51885查看xig的进程目录，和用lsof -i 查看端口开放状态。3.通过命令cat /etc/passwd 发现了陌生用户和可疑 4.用iostat命令查看块设备运行状态 5.用netstat -anplt查看端口开放情况，发现了几个可疑的端口和对应的服务。 6.用crontab -l命令查看计划任务，发现了可疑状态。 7.在/opt中目录中新增了如下的可疑文件 8.查看这些文件的内容如下： 9.查看开机启动项systemctl list-unit-files | grep enable，发现YiluzhuanqianSer.service服务。 10.其他：（1）通过命令find . -type -f atime -3搜索最近3天内被访问过的所有文件 （2）history 查看命令历史。less tail -200 .bash_history查看200条各用户命令记录。 （3）last查看最近登录用户。 （4）检测alias别名 0x03 【清除木马】1.去除可疑文件的权限 2.删除可以的文件和目录 3.清除计划任务。1crontab -r //清除计划任务 4.关掉可疑的开机自启服务YiluzhuanqianSer.service 5.查看进程，杀死可疑的服务进程123ps auxkill -9 51877 6、reboot 重启0x04 【检测已经清除木马】CUP运行正常： 端口开放正常： 一路赚钱后台212的IP已经离线： 0x05 【参考文献】https://www.jianshu.com/p/26d1567c4d0b https://wenku.baidu.com/view/d9c72c596c85ec3a86c2c54e.html]]></content>
