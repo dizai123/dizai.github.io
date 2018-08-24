@@ -93,8 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/images/SQL/42.png">
 <meta property="og:image" content="http://yoursite.com/images/SQL/43.png">
 <meta property="og:image" content="http://yoursite.com/images/SQL/44.png">
-<meta property="og:image" content="http://yoursite.com/images/SQL/45.png">
-<meta property="og:updated_time" content="2018-08-24T15:07:56.590Z">
+<meta property="og:updated_time" content="2018-08-24T15:15:34.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker快速部署驭龙HIDS">
 <meta name="twitter:description" content="0x01 前言驭龙HIDS是一款由 YSRC 开源的入侵检测系统，由Agent,Daemon,Server 和Web四个部分组成，集异常检测、监控管理为一体，拥有异常行为发现、快速阻断、高级分析等功能，可从多个维度行为信息中发现入侵行为。 Agent为采集者角色，收集服务器信息、开机启动项、计划任务、监听端口、服务、登录日志、用户列表，实时监控文件操作行为、网络连接、执行命令，初步筛选整理后通过R">
@@ -433,9 +432,8 @@
 <p>初始化的第3步所需要上传的文件需前往<a href="https://github.com/ysrc/yulong-hids/releases" target="_blank" rel="noopener">Release发布页</a>下载发行版 zip 包，并解压，然后上传对应的 win-32.zip,win-64.zip,linux-64.zip即可。</p>
 <p><img src="/images/SQL/43.png" alt="upload successful"></p>
 <h4 id="Step4-重新启动"><a href="#Step4-重新启动" class="headerlink" title="Step4.重新启动"></a>Step4.重新启动</h4><p>通过 Web 初始化完毕后，切回 docker-compose up 的终端，按下 Ctrl + C 组合键，结束进程，然后执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose up -d</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/SQL/44.png" alt="upload successful"></p>
 <p>浏览器打开 <a href="http://192.168.3.43就可以看到正常功能的界面了" target="_blank" rel="noopener">http://192.168.3.43就可以看到正常功能的界面了</a>.</p>
-<p><img src="/images/SQL/45.png" alt="upload successful"></p>
+<p><img src="/images/SQL/44.png" alt="upload successful"></p>
 <h4 id="Step5-启动Server调校程序"><a href="#Step5-启动Server调校程序" class="headerlink" title="Step5.启动Server调校程序"></a>Step5.启动Server调校程序</h4><p>下载Adapter：<a href="https://sec.ly.com/mirror/yulong_server_docker_adapter_linux_amd64.zip" target="_blank" rel="noopener">https://sec.ly.com/mirror/yulong_server_docker_adapter_linux_amd64.zip</a></p>
 <p>另起一个会话窗口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rz    #本地下载的Adapter</span><br><span class="line">unzip yulong_server_docker_adapter_linux_amd64.zip</span><br><span class="line">chmod +x yulong_server_docker_adapter_linux_amd64</span><br><span class="line">./yulong_server_docker_adapter_linux_amd64</span><br></pre></td></tr></table></figure></p>
 <p>这个程序要一直运行着…</p>
