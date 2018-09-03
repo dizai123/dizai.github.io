@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32x32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16x16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="应急响应," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="DiZai" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="0x01 应急响应的背景CERT/CC服务内容">
+<meta name="keywords" content="应急响应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="应急响应">
+<meta property="og:url" content="http://yoursite.com/2018/09/03/应急响应/index.html">
+<meta property="og:site_name" content="DiZai">
+<meta property="og:description" content="0x01 应急响应的背景CERT/CC服务内容">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/pasted-86.png">
+<meta property="og:updated_time" content="2018-09-03T13:51:05.090Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="应急响应">
+<meta name="twitter:description" content="0x01 应急响应的背景CERT/CC服务内容">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-86.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/03/应急响应/"/>
+
+
+
+
+
+  <title>应急响应 | DiZai</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DiZai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Just do IT</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/应急响应/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="迪仔">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DiZai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">应急响应</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-03T21:40:36+08:00">
+                2018-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全运维/" itemprop="url" rel="index">
+                    <span itemprop="name">安全运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,435
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"> 
+	 
+      
+
+      
+        <h2 id="0x01-应急响应的背景"><a href="#0x01-应急响应的背景" class="headerlink" title="0x01 应急响应的背景"></a>0x01 应急响应的背景</h2><h3 id="CERT-CC服务内容"><a href="#CERT-CC服务内容" class="headerlink" title="CERT/CC服务内容"></a>CERT/CC服务内容</h3><a id="more"></a>
+<ul>
+<li>安全事件响应</li>
+<li>安全事件分析和软件安全缺陷研究</li>
+<li>缺陷知识库开发</li>
+<li>信息发布：缺陷、公告、总结、统计、补丁、工具</li>
+<li>教育与培训：CSIRT管理、CSIRT技术培训、系统和网络管理员安全培训</li>
+<li>指导其它CSIRT（也称IRT、CERT）组织建设。</li>
+</ul>
+<h2 id="0x02-应急响应的概念"><a href="#0x02-应急响应的概念" class="headerlink" title="0x02 应急响应的概念"></a>0x02 应急响应的概念</h2><h3 id="什么是应急响应？"><a href="#什么是应急响应？" class="headerlink" title="什么是应急响应？"></a>什么是应急响应？</h3><pre><code>是指组织为了应对突发/重大信息安全事件的发生所做的准备以及在事件发生后所采取的措施。
+</code></pre><h3 id="什么是安全事件？"><a href="#什么是安全事件？" class="headerlink" title="什么是安全事件？"></a>什么是安全事件？</h3><pre><code>安全事件则是指影响一个系统正常工作的情况。这里的系统包括主机范畴内的问题，也包括网络范畴内的问题，例如黑客入侵、信息窃取、拒绝服务攻击、网络流量异常等。
+</code></pre><h3 id="应急响应的描述"><a href="#应急响应的描述" class="headerlink" title="应急响应的描述"></a>应急响应的描述</h3><pre><code>客户的主机或网络正遭到攻击或发现入侵成功的痕迹，而又无法当时解决和追查来源时，安全服务商根据客户的要求以最快的速度赶到现场，协助客户解决问题，查找后门，保存证据和追查来源。
+</code></pre><h3 id="安全事件的分类（七类）："><a href="#安全事件的分类（七类）：" class="headerlink" title="安全事件的分类（七类）："></a>安全事件的分类（七类）：</h3><p>1、蠕虫类</p>
+<p>2、网络攻击类：DOS、DDOS、扫描</p>
+<p>3、信息破坏类：网站内容篡改</p>
+<p>4、信息内容安全：</p>
+<p>5、设备设施故障</p>
+<p>6、自然灾害</p>
+<p>7、其他</p>
+<h3 id="应急响应的目的"><a href="#应急响应的目的" class="headerlink" title="应急响应的目的"></a>应急响应的目的</h3><ul>
+<li>应急响应服务的目的是最快速度恢复系统的保密性、完整性和可用性，阻止和减小安全事件带来的影响。</li>
+<li>应急响应服务的目的是尽可能地减小和控制住网络安全事件的损失，提供有效的响应和恢复指导，并努力防止安全事件的发生。</li>
+</ul>
+<p><img src="/images/pasted-86.png" alt="upload successful"></p>
+<h3 id="应急响应服务的特点"><a href="#应急响应服务的特点" class="headerlink" title="应急响应服务的特点"></a>应急响应服务的特点</h3><ul>
+<li><p>技术复杂性与专业性</p>
+</li>
+<li><p>知识经验的依赖性</p>
+</li>
+<li><p>事件突发性</p>
+</li>
+<li><p>协作能力</p>
+</li>
+</ul>
+<h3 id="应急响应体系"><a href="#应急响应体系" class="headerlink" title="应急响应体系"></a>应急响应体系</h3><pre><code>是指在突发/重大信息安全事件后对包括计算机运行在内的业务运行进行维持或恢复的各种技术和管理策略和规程
+</code></pre><p>信息安全应急响应体系的制定是一个周而复始、持续改进的过程，包含以下几个阶段：</p>
+<p>（1）应急响应需求分析和应急响应策略的确定；</p>
+<p>（2）编制应急响应计划文档；</p>
+<p>（3）应急响应计划的测试、培训、演练和维护</p>
+<h2 id="0x03-应急响应组的组建"><a href="#0x03-应急响应组的组建" class="headerlink" title="0x03 应急响应组的组建"></a>0x03 应急响应组的组建</h2><h3 id="什么是应急响应组（IRT）"><a href="#什么是应急响应组（IRT）" class="headerlink" title="什么是应急响应组（IRT）"></a>什么是应急响应组（IRT）</h3><pre><code>应急响应组就是一个或更多的个人组成的团队，能快速执行和处理与安全有关的事件的任务。
+</code></pre><h3 id="为什么需要成立应急响应组"><a href="#为什么需要成立应急响应组" class="headerlink" title="为什么需要成立应急响应组"></a>为什么需要成立应急响应组</h3><ol>
+<li>容易协调响应工作</li>
+<li>提高专业知识</li>
+<li>提高效率</li>
+<li>提高先期主动防御能力</li>
+<li>更加适合于满足机构的需要</li>
+<li>提高联络功能</li>
+<li>提高处理制度障碍方面的能力</li>
+</ol>
+<h3 id="应急响应相关行业规范"><a href="#应急响应相关行业规范" class="headerlink" title="应急响应相关行业规范"></a>应急响应相关行业规范</h3><pre><code>GB/T 24364-2009 《信息安全技术 信息安全应急响应计划规范》
+
+GB/T 20988-2007 《信息安全技术 信息系统应急响应规范》
+
+GB/Z 20985-2007 《信息技术 安全技术 信息安全事件管理指南》
+
+GB/Z 20986-2007 《信息安全技术 信息安全事件分类分级指南》
+</code></pre><h2 id="0x03-应急响应六个阶段："><a href="#0x03-应急响应六个阶段：" class="headerlink" title="0x03 应急响应六个阶段："></a>0x03 应急响应六个阶段：</h2><p><strong>准备（preparation）、检测(detection)、遏制(containment)、根除(eradication)、恢复(recovery)、跟踪(follow-up)   ——即PDCERF</strong></p>
+<h3 id="第一阶段：准备——preparation"><a href="#第一阶段：准备——preparation" class="headerlink" title="第一阶段：准备——preparation"></a>第一阶段：准备——preparation</h3><p>准备阶段是安全事件响应的第一个阶段，在事件真正发生之前为事件响应做好相应的准备</p>
+<p>比如，漏洞扫描、打补丁等，资源准备</p>
+<h3 id="第二阶段：检测——detection"><a href="#第二阶段：检测——detection" class="headerlink" title="第二阶段：检测——detection"></a>第二阶段：检测——detection</h3><p>使用恰当的方法来确认系统或网络中是否出现了恶意代码、网络攻击、目录文件存在被篡改等异常现象</p>
+<ul>
+<li>事件标记</li>
+<li><p>信息来源</p>
+</li>
+<li><p>开启审计</p>
+</li>
+<li>事件定级</li>
+<li>响应方式</li>
+</ul>
+<h3 id="第三阶段：抑制——containment"><a href="#第三阶段：抑制——containment" class="headerlink" title="第三阶段：抑制——containment"></a>第三阶段：抑制——containment</h3><p>抑制攻击或破环波及的范围</p>
+<p>建议组织机构为几类主要的事故建立单独的抑制策略，其标准包括：</p>
+<p>潜在的破坏和资源的窃取</p>
+<p>证据保留的需要</p>
+<p>服务可用性（例如：网络连接，提供给外部当事方的服务）</p>
+<p>实施战略需要的时间和资源</p>
+<p>战略的有效性（例如：部分遏制事故，完全遏制事故）</p>
+<p>解决方案的期限</p>
+<h3 id="第四阶段：根除——eradication"><a href="#第四阶段：根除——eradication" class="headerlink" title="第四阶段：根除——eradication"></a>第四阶段：根除——eradication</h3><p>找到事件的根源彻底清除，防止攻击者再次使用相同的手段对系统或网络造成破坏，引发新的安全事件。</p>
+<h3 id="第五阶段：恢复——recovery"><a href="#第五阶段：恢复——recovery" class="headerlink" title="第五阶段：恢复——recovery"></a>第五阶段：恢复——recovery</h3><p>业务恢复</p>
+<h3 id="第六阶段：跟踪——follow-up"><a href="#第六阶段：跟踪——follow-up" class="headerlink" title="第六阶段：跟踪——follow-up"></a>第六阶段：跟踪——follow-up</h3><pre><code>关注系统恢复以后的安全状况，特别是曾经出问题的地方；建立跟踪文档，规范记录跟踪结果；对响应效果给出评估；对进入司法程序的事件，进行进一步的调查，打击违法犯罪活
+</code></pre><h2 id="0x04-应急响应预案制定"><a href="#0x04-应急响应预案制定" class="headerlink" title="0x04 应急响应预案制定"></a>0x04 应急响应预案制定</h2><h3 id="应急响应预案的包括的主要内容"><a href="#应急响应预案的包括的主要内容" class="headerlink" title="应急响应预案的包括的主要内容"></a>应急响应预案的包括的主要内容</h3><ul>
+<li>确定风险场景</li>
+<li>描述可能受到的业务影响</li>
+<li>描述使用的预防性策略</li>
+<li>描述应急响应策略</li>
+<li>识别和排列关键应用系统</li>
+<li>行动计划</li>
+<li>团队和人员的职责</li>
+<li>联络清单</li>
+<li>所需资源配置</li>
+</ul>
+<h3 id="成功预案的特点"><a href="#成功预案的特点" class="headerlink" title="成功预案的特点"></a>成功预案的特点</h3><ul>
+<li>清楚、简洁</li>
+<li>高级管理层支持/组织承诺</li>
+<li>不断改进和更新的恢复策略</li>
+<li>及时的更新维护</li>
+</ul>
+
+      
+    </div>
+	
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+    
+    
+    
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/应急响应/" <i class="fa fa-tag"></i> 应急响应</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/02/渗透测试浅析/" rel="next" title="渗透测试浅析">
+                <i class="fa fa-chevron-left"></i> 渗透测试浅析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/03/在Linux中安全pip，可兼容Python-3-x/" rel="prev" title="在Linux中安全pip，可兼容Python 3.x">
+                在Linux中安全pip，可兼容Python 3.x <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">迪仔</p>
+              <p class="site-description motion-element" itemprop="description">一只不断学习的小菜鸟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-应急响应的背景"><span class="nav-number">1.</span> <span class="nav-text">0x01 应急响应的背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CERT-CC服务内容"><span class="nav-number">1.1.</span> <span class="nav-text">CERT/CC服务内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-应急响应的概念"><span class="nav-number">2.</span> <span class="nav-text">0x02 应急响应的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是应急响应？"><span class="nav-number">2.1.</span> <span class="nav-text">什么是应急响应？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是安全事件？"><span class="nav-number">2.2.</span> <span class="nav-text">什么是安全事件？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应急响应的描述"><span class="nav-number">2.3.</span> <span class="nav-text">应急响应的描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全事件的分类（七类）："><span class="nav-number">2.4.</span> <span class="nav-text">安全事件的分类（七类）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应急响应的目的"><span class="nav-number">2.5.</span> <span class="nav-text">应急响应的目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应急响应服务的特点"><span class="nav-number">2.6.</span> <span class="nav-text">应急响应服务的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应急响应体系"><span class="nav-number">2.7.</span> <span class="nav-text">应急响应体系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-应急响应组的组建"><span class="nav-number">3.</span> <span class="nav-text">0x03 应急响应组的组建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是应急响应组（IRT）"><span class="nav-number">3.1.</span> <span class="nav-text">什么是应急响应组（IRT）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要成立应急响应组"><span class="nav-number">3.2.</span> <span class="nav-text">为什么需要成立应急响应组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应急响应相关行业规范"><span class="nav-number">3.3.</span> <span class="nav-text">应急响应相关行业规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-应急响应六个阶段："><span class="nav-number">4.</span> <span class="nav-text">0x03 应急响应六个阶段：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一阶段：准备——preparation"><span class="nav-number">4.1.</span> <span class="nav-text">第一阶段：准备——preparation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二阶段：检测——detection"><span class="nav-number">4.2.</span> <span class="nav-text">第二阶段：检测——detection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三阶段：抑制——containment"><span class="nav-number">4.3.</span> <span class="nav-text">第三阶段：抑制——containment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四阶段：根除——eradication"><span class="nav-number">4.4.</span> <span class="nav-text">第四阶段：根除——eradication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五阶段：恢复——recovery"><span class="nav-number">4.5.</span> <span class="nav-text">第五阶段：恢复——recovery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六阶段：跟踪——follow-up"><span class="nav-number">4.6.</span> <span class="nav-text">第六阶段：跟踪——follow-up</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-应急响应预案制定"><span class="nav-number">5.</span> <span class="nav-text">0x04 应急响应预案制定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应急响应预案的包括的主要内容"><span class="nav-number">5.1.</span> <span class="nav-text">应急响应预案的包括的主要内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成功预案的特点"><span class="nav-number">5.2.</span> <span class="nav-text">成功预案的特点</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">迪仔</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共61.5k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

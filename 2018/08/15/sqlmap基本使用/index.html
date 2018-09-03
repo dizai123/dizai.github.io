@@ -90,7 +90,7 @@
 <meta property="og:description" content="完全支持MySQL、Oracle、PostgreSQL、Microsoft SQL Server、Microsoft Access、IBM DB2、SQLite、Firebird、Sybase、SAP MaxDB、HSQLDB和Informix等多种数据库管理系统 完全支持布尔型盲注、时间型盲注、基于错误信息的注入、联合查询注入和堆查询注入。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/安全工具/8.png">
-<meta property="og:updated_time" content="2018-08-15T02:50:08.302Z">
+<meta property="og:updated_time" content="2018-09-03T14:02:35.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqlmap基本使用">
 <meta name="twitter:description" content="完全支持MySQL、Oracle、PostgreSQL、Microsoft SQL Server、Microsoft Access、IBM DB2、SQLite、Firebird、Sybase、SAP MaxDB、HSQLDB和Informix等多种数据库管理系统 完全支持布尔型盲注、时间型盲注、基于错误信息的注入、联合查询注入和堆查询注入。">
@@ -340,7 +340,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,904
+                  2,511
                 </span>
               
 
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  10
                 </span>
               
             </div>
@@ -400,68 +400,87 @@
 <p><strong>若数据库管理系统是MySQL、PostgreSQL或微软的SQL Server且当前用户有相关权限Sqlmap就能利用SQL注入执行任意的操作系统命令。</strong></p>
 <p>当数据库管理系统是MySQL或PostgreSQL时，Sqlmap会通过前面介绍过的文件上传功能上传一个包含用户自定义函数sys_exec()和sys_eval()的二进制共享库文件，然后创建这两个用户自定义函数，通过这两个函数之一来执行用户指定的命令。选择哪个函数取决于用户是否想要显示命令执行的标准输出。</p>
 <h3 id="获取目标方式"><a href="#获取目标方式" class="headerlink" title="获取目标方式"></a>获取目标方式</h3><p><strong>1.直接连接到数据库</strong></p>
-<p>​    参数：-d</p>
-<p>​    对单个数据库实例运行sqlmap</p>
-<p>python sqlmap.py -d “mysql://admin:<a href="mailto:admin@192.168.1.2" target="_blank" rel="noopener">admin@192.168.1.2</a>:3306/testdb” -f –banner –dbs –users</p>
+<pre><code>参数：-d
+
+对单个数据库实例运行sqlmap
+</code></pre><p>python sqlmap.py -d “mysql://admin:<a href="mailto:admin@192.168.1.2" target="_blank" rel="noopener">admin@192.168.1.2</a>:3306/testdb” -f –banner –dbs –users</p>
 <p><strong>2.目标URL</strong></p>
-<p>​    参数：-u或者—url</p>
-<p>​    URL格式要求：http(s)://targeturl[:port]/[…]</p>
-<p>python sqlmap.py -u “<a href="http://www.target.com/vuln.php?id=1&quot;" target="_blank" rel="noopener">http://www.target.com/vuln.php?id=1&quot;</a> -f –banner –dbs –users</p>
+<pre><code>参数：-u或者—url
+
+URL格式要求：http(s)://targeturl[:port]/[…]
+</code></pre><p>python sqlmap.py -u “<a href="http://www.target.com/vuln.php?id=1&quot;" target="_blank" rel="noopener">http://www.target.com/vuln.php?id=1&quot;</a> -f –banner –dbs –users</p>
 <p><strong>3.从Burp或WebScarab代理中获取日志</strong></p>
-<p>​    参数：-l</p>
-<p>​    把Burp proxy或者WebScarab proxy中的日志直接导出来交给sqlmap检测</p>
-<p><strong>4.从文本中获取多个目标扫描</strong></p>
-<p>​    参数：-m</p>
-<p>​    URL保存在文本中，sqlmap会一个一个检测</p>
-<p><strong>5.从文件中加载HTTP请求</strong></p>
-<p>​    参数：-r</p>
-<p>​    【可以跳过设置一些其他参数比如cookie，POST数据】</p>
-<p>​    当请求是HTTPS的时候要配合—force-ssl参数来使用，或者你可以在Host头后面加上:443</p>
-<h3 id="请求方式："><a href="#请求方式：" class="headerlink" title="请求方式："></a>请求方式：</h3><p><strong>1.http数据</strong></p>
-<p>​    参数：–data</p>
-<p>​    此参数是把数据以POST方式提交，sqlmap会像检测GET参数一样检测POST的参数</p>
-<p>​    python sqlmap.py -u “<a href="http://www.target.com/vuln.php&quot;" target="_blank" rel="noopener">http://www.target.com/vuln.php&quot;</a> –data=”id=1” -f –banner –dbs –users</p>
-<p><strong>2.参数拆分字符</strong></p>
-<p>​    参数：–param-del</p>
-<p>​    当GET或POST的数据需要用其他字符分割测试参数的时候需要用到此参数</p>
-<p>​    python sqlmap.py -u “<a href="http://www.target.com/vuln.php&quot;" target="_blank" rel="noopener">http://www.target.com/vuln.php&quot;</a> –data=”query=foobar;id=1” –param-del=”;” -f –banner –dbs –users</p>
-<p><strong>3.HTTP cookie头</strong></p>
-<p>​    参数：–cookie/–load-cookies/–drop-set-cookie</p>
-<p>​    a.web应用需要登陆的时候</p>
-<p>​    b.你想要在这些头参数中测试SQL注入时</p>
-<p>​    如果你不想接受set-cookie可以使用—drop-set-cookie参数来拒接</p>
-<p><strong>4.HTTP User-Agent头</strong></p>
-<p>​    参数：–user-agent/–random-agent</p>
-<p>​    【可以使用–user-agent参数来修改，同时也可以使用–random-agent参数来随机的从./txt/user-agents.txt中获取】</p>
-<p>​    当–level参数设定为3或者3以上的时候，会尝试对User-agent进行注入</p>
-<h3 id="探测："><a href="#探测：" class="headerlink" title="探测："></a>探测：</h3><p><strong>1.URI注入点</strong></p>
-<p>​    参数：-u</p>
-<p>​    python sqlmap.py -u “<a href="http://www.target.com/vuln/param1/vuln1*/param2&quot;" target="_blank" rel="noopener">http://www.target.com/vuln/param1/vuln1*/param2&quot;</a></p>
-<p><strong>2.指定数据库</strong></p>
-<p>​    参数：–dbms</p>
-<p>​    sqlmap会自动探测web的应用后端数据库是什么</p>
-<p><strong>3.风险等级</strong></p>
-<p>​    参数：–risk</p>
-<p>​    共有四个风险等级，默认是1，会探测大部分的测试语句，2会增加基于事件的测试语句，3会增加OR语句的SQL注入测试。</p>
-<p><strong>4.列出数据库系统的数据库</strong>    </p>
+<pre><code>参数：-l
+
+把Burp proxy或者WebScarab proxy中的日志直接导出来交给sqlmap检测
+</code></pre><p><strong>4.从文本中获取多个目标扫描</strong></p>
+<pre><code>参数：-m
+
+URL保存在文本中，sqlmap会一个一个检测
+</code></pre><p><strong>5.从文件中加载HTTP请求</strong></p>
+<pre><code>参数：-r
+
+【可以跳过设置一些其他参数比如cookie，POST数据】
+
+当请求是HTTPS的时候要配合—force-ssl参数来使用，或者你可以在Host头后面加上:443
+</code></pre><h3 id="请求方式："><a href="#请求方式：" class="headerlink" title="请求方式："></a>请求方式：</h3><p><strong>1.http数据</strong></p>
+<pre><code>参数：--data
+
+此参数是把数据以POST方式提交，sqlmap会像检测GET参数一样检测POST的参数
+
+python sqlmap.py -u &quot;http://www.target.com/vuln.php&quot; --data=&quot;id=1&quot; -f --banner --dbs --users
+</code></pre><p><strong>2.参数拆分字符</strong></p>
+<pre><code>参数：--param-del
+
+当GET或POST的数据需要用其他字符分割测试参数的时候需要用到此参数
+
+python sqlmap.py -u &quot;http://www.target.com/vuln.php&quot; --data=&quot;query=foobar;id=1&quot; --param-del=&quot;;&quot; -f --banner --dbs --users
+</code></pre><p><strong>3.HTTP cookie头</strong></p>
+<pre><code>参数：--cookie/--load-cookies/--drop-set-cookie
+
+a.web应用需要登陆的时候
+
+b.你想要在这些头参数中测试SQL注入时
+
+如果你不想接受set-cookie可以使用—drop-set-cookie参数来拒接
+</code></pre><p><strong>4.HTTP User-Agent头</strong></p>
+<pre><code>参数：--user-agent/--random-agent
+
+【可以使用--user-agent参数来修改，同时也可以使用--random-agent参数来随机的从./txt/user-agents.txt中获取】
+
+当--level参数设定为3或者3以上的时候，会尝试对User-agent进行注入
+</code></pre><h3 id="探测："><a href="#探测：" class="headerlink" title="探测："></a>探测：</h3><p><strong>1.URI注入点</strong></p>
+<pre><code>参数：-u
+
+python sqlmap.py -u &quot;http://www.target.com/vuln/param1/vuln1*/param2&quot;
+</code></pre><p><strong>2.指定数据库</strong></p>
+<pre><code>参数：--dbms
+
+sqlmap会自动探测web的应用后端数据库是什么
+</code></pre><p><strong>3.风险等级</strong></p>
+<pre><code>参数：--risk
+
+共有四个风险等级，默认是1，会探测大部分的测试语句，2会增加基于事件的测试语句，3会增加OR语句的SQL注入测试。
+</code></pre><p><strong>4.列出数据库系统的数据库</strong>    </p>
 <p>参数：–dbs    当前用户有权限读取包含所有数据库列表信息的表中的时候，即可列出所有的数据库</p>
 <p><strong>5.列举数据库表</strong>    </p>
 <p>参数：–tables,–exclude-sysdbs,-D    当前用户有权限读取包含所有数据库表信息的表中的时候，即可列出一个特定数据的所有表。如果你不提供-D参数来列指定的一个数据的时候，sqlmap会列出数据库所有库的所有表。</p>
-<p>​    –exclude-sysdbs参数是指排除包含了所有数据库名的系统数据库。</p>
-<p>​    需要注意的是在Oracle中你需要提供的是TABLESPACE_NAME而不是数据库名称。</p>
-<p><strong>6.列举数据库表中的字段</strong>    </p>
+<pre><code>--exclude-sysdbs参数是指排除包含了所有数据库名的系统数据库。
+
+需要注意的是在Oracle中你需要提供的是TABLESPACE_NAME而不是数据库名称。
+</code></pre><p><strong>6.列举数据库表中的字段</strong>    </p>
 <p>参数：–columns,-C,-T,-D    当前用户有权限读取包含所有数据库表信息的表中数据的时候，即可列出指定数据库表中的字段，同时也会列出字段的数据类型。</p>
-<p>​    如果没有使用-D参数指定数据库时，默认会使用当前数据库。</p>
-<p><strong>7.获取整个表的数据</strong>    </p>
+<pre><code>如果没有使用-D参数指定数据库时，默认会使用当前数据库。
+</code></pre><p><strong>7.获取整个表的数据</strong>    </p>
 <p>参数：–dump,-C,-T,-D,–start,–stop,–first,–last    如果当前管理员有权限读取数据库其中的一个表的话，那么就能获取整个表的所有内容。</p>
-<p>​    使用-D,-T参数指定想要获取哪个库的哪个表，不使用-D参数时，默认使用当前库。    可以获取指定库中的所有表的内容，使用–dump跟-D参数（不使用-T与-C参数）。</p>
-<h3 id="爆破："><a href="#爆破：" class="headerlink" title="爆破："></a>爆破：</h3><p><strong>1.暴力破解表名</strong>    </p>
+<pre><code>使用-D,-T参数指定想要获取哪个库的哪个表，不使用-D参数时，默认使用当前库。    可以获取指定库中的所有表的内容，使用--dump跟-D参数（不使用-T与-C参数）。
+</code></pre><h3 id="爆破："><a href="#爆破：" class="headerlink" title="爆破："></a>爆破：</h3><p><strong>1.暴力破解表名</strong>    </p>
 <p>参数：–common-tables    当使用–tables无法获取到数据库的表时，可以使用此参数。通常是如下情况：</p>
 <p><strong>1、MySQL数据库版本小于5.0，没有information_schema表。</strong></p>
 <p><strong>2、数据库是MicrossoftAccess，系统表MSysObjects是不可读的（默认）。</strong></p>
 <p><strong>3、当前用户没有权限读取系统中保存数据结构的表的权限。</strong></p>
-<p>​    <strong>暴力破解的表在txt/common-tables.txt文件中，你可以自己添加。</strong></p>
-<p><strong>2.暴力破解列名</strong>    </p>
+<pre><code>**暴力破解的表在txt/common-tables.txt文件中，你可以自己添加。**
+</code></pre><p><strong>2.暴力破解列名</strong>    </p>
 <p>参数：–common-columns    与暴力破解表名一样，暴力跑的列名在txt/common-columns.txt中。</p>
 <h3 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h3><p>列取数据库 sqlmap.py -u [URL] –dbs</p>
 <p>获取当前数据库 sqlmap.py -u [URL] –current-db</p>
@@ -488,6 +507,203 @@
 <p>–file-read –file-write –os-cmd/–os-shell –flush-session </p>
 <p>➢api 自动化、分布式 </p>
 <p>sqlmapapi.py -s H 127.0.0.1 -p 6666</p>
+<h3 id="Tamper-概览"><a href="#Tamper-概览" class="headerlink" title="Tamper 概览"></a>Tamper 概览</h3><table>
+<thead>
+<tr>
+<th>脚本名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>apostrophemask.py</td>
+<td>用utf8代替引号</td>
+</tr>
+<tr>
+<td>equaltolike.py</td>
+<td>like 代替等号</td>
+</tr>
+<tr>
+<td>space2dash.py</td>
+<td>绕过过滤‘=’ 替换空格字符（”），（’’ – ‘）后跟一个破折号注释，一个随机字符串和一个新行（’ n’）</td>
+</tr>
+<tr>
+<td>greatest.py</td>
+<td>绕过过滤’&gt;’ ,用GREATEST替换大于号。</td>
+</tr>
+<tr>
+<td>space2hash.py</td>
+<td>空格替换为#号 随机字符串 以及换行符</td>
+</tr>
+<tr>
+<td>apostrophenullencode.py</td>
+<td>绕过过滤双引号，替换字符和双引号。</td>
+</tr>
+<tr>
+<td>halfversionedmorekeywords.py</td>
+<td>当数据库为mysql时绕过防火墙，每个关键字之前添加mysql版本评论</td>
+</tr>
+<tr>
+<td>space2morehash.py</td>
+<td>空格替换为 #号 以及更多随机字符串 换行符</td>
+</tr>
+<tr>
+<td>appendnullbyte.py</td>
+<td>在有效负荷结束位置加载零字节字符编码</td>
+</tr>
+<tr>
+<td>ifnull2ifisnull.py</td>
+<td>绕过对 IFNULL 过滤。 替换类似’IFNULL(A, B)’为’IF(ISNULL(A), B, A)’</td>
+</tr>
+<tr>
+<td>space2mssqlblank.py</td>
+<td>空格替换为其它空符号</td>
+</tr>
+<tr>
+<td>base64encode.py</td>
+<td>用base64编码替换</td>
+</tr>
+<tr>
+<td>space2mssqlhash.py</td>
+<td>替换空格</td>
+</tr>
+<tr>
+<td>modsecurityversioned.py</td>
+<td>过滤空格，包含完整的查询版本注释</td>
+</tr>
+<tr>
+<td>space2mysqlblank.py</td>
+<td>空格替换其它空白符号(mysql)</td>
+</tr>
+<tr>
+<td>between.py</td>
+<td>用between替换大于号（&gt;）</td>
+</tr>
+<tr>
+<td>space2mysqldash.py</td>
+<td>替换空格字符（”）（’ – ‘）后跟一个破折号注释一个新行（’ n’）</td>
+</tr>
+<tr>
+<td>multiplespaces.py</td>
+<td>围绕SQL关键字添加多个空格</td>
+</tr>
+<tr>
+<td>space2plus.py</td>
+<td>用+替换空格</td>
+</tr>
+<tr>
+<td>bluecoat.py</td>
+<td>代替空格字符后与一个有效的随机空白字符的SQL语句。 然后替换=为like</td>
+</tr>
+<tr>
+<td>nonrecursivereplacement.py</td>
+<td>取代predefined SQL关键字with表示 suitable for替代（例如 .replace（“SELECT”、””)） filters</td>
+</tr>
+<tr>
+<td>space2randomblank.py</td>
+<td>代替空格字符（“”）从一个随机的空白字符可选字符的有效集</td>
+</tr>
+<tr>
+<td>sp_password.py</td>
+<td>追加sp_password’从DBMS日志的自动模糊处理的有效载荷的末尾</td>
+</tr>
+<tr>
+<td>chardoubleencode.py</td>
+<td>双url编码(不处理以编码的)</td>
+</tr>
+<tr>
+<td>unionalltounion.py</td>
+<td>替换UNION ALL SELECT UNION SELECT</td>
+</tr>
+<tr>
+<td>charencode.py</td>
+<td>url编码</td>
+</tr>
+<tr>
+<td>randomcase.py</td>
+<td>随机大小写</td>
+</tr>
+<tr>
+<td>unmagicquotes.py</td>
+<td>宽字符绕过 GPC addslashes</td>
+</tr>
+<tr>
+<td>randomcomments.py</td>
+<td>用/**/分割sql关键字</td>
+</tr>
+<tr>
+<td>charunicodeencode.py</td>
+<td>字符串 unicode 编码</td>
+</tr>
+<tr>
+<td>securesphere.py</td>
+<td>追加特制的字符串</td>
+</tr>
+<tr>
+<td>versionedmorekeywords.py</td>
+<td>注释绕过</td>
+</tr>
+<tr>
+<td>space2comment.py</td>
+<td>Replaces space character (‘ ‘) with comments ‘/**/’</td>
+</tr>
+</tbody>
+</table>
+<h3 id="SQL常用语句"><a href="#SQL常用语句" class="headerlink" title="SQL常用语句"></a>SQL常用语句</h3><p><strong>SQL常用语句</strong></p>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>MSSQL</th>
+<th>MYSQL</th>
+<th>ORACLE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查看版本</td>
+<td>select @@version</td>
+<td>select @@version select version()</td>
+<td>Select banner from v$version;</td>
+</tr>
+<tr>
+<td>当前用户</td>
+<td>select system_users; select suer_sname(); select user; select loginname from master..sysprocesses WHERE spid =@@SPID;</td>
+<td>select user(); select system_user();</td>
+<td>Select user from dual</td>
+</tr>
+<tr>
+<td>列出用户</td>
+<td>select name from master..syslogins;</td>
+<td>select user from mysql.user;</td>
+<td>Select username from all_users ORDER BY username; Select username from all_users;</td>
+</tr>
+<tr>
+<td>当前库</td>
+<td>select DB_NAME();</td>
+<td>select database();</td>
+<td>Select global_name from global_name;</td>
+</tr>
+<tr>
+<td>列出数据库</td>
+<td>select name from master..sysdatabases;</td>
+<td>select schema_name from information_schema.schemata;</td>
+<td>Select ower,table_name from all_users; #列出表明</td>
+</tr>
+<tr>
+<td>当前用户权限</td>
+<td>select is_srvolemenber(‘sysadmin’);</td>
+<td>select grantee, privilege_type,is_grantable from information schema.user privileges;</td>
+<td>Select <em> from user role_privs; Select </em> from user_sys_privs;</td>
+</tr>
+<tr>
+<td>服务器主机名</td>
+<td>select @@servername;</td>
+<td>/</td>
+<td>Select sys_context(‘USERENV’,’HOST’) from dual;</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -617,7 +833,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -639,7 +855,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -679,7 +895,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Liunx上安装sqlmap"><span class="nav-number">1.</span> <span class="nav-text">Liunx上安装sqlmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windwos上安装sqlmap"><span class="nav-number">2.</span> <span class="nav-text">Windwos上安装sqlmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取目标方式"><span class="nav-number">3.</span> <span class="nav-text">获取目标方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求方式："><span class="nav-number">4.</span> <span class="nav-text">请求方式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#探测："><span class="nav-number">5.</span> <span class="nav-text">探测：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爆破："><span class="nav-number">6.</span> <span class="nav-text">爆破：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充："><span class="nav-number">7.</span> <span class="nav-text">补充：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sqlmap常用命令"><span class="nav-number">8.</span> <span class="nav-text">sqlmap常用命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Liunx上安装sqlmap"><span class="nav-number">1.</span> <span class="nav-text">Liunx上安装sqlmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windwos上安装sqlmap"><span class="nav-number">2.</span> <span class="nav-text">Windwos上安装sqlmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取目标方式"><span class="nav-number">3.</span> <span class="nav-text">获取目标方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求方式："><span class="nav-number">4.</span> <span class="nav-text">请求方式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#探测："><span class="nav-number">5.</span> <span class="nav-text">探测：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爆破："><span class="nav-number">6.</span> <span class="nav-text">爆破：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充："><span class="nav-number">7.</span> <span class="nav-text">补充：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sqlmap常用命令"><span class="nav-number">8.</span> <span class="nav-text">sqlmap常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tamper-概览"><span class="nav-number">9.</span> <span class="nav-text">Tamper 概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL常用语句"><span class="nav-number">10.</span> <span class="nav-text">SQL常用语句</span></a></li></ol></div>
             
 
           </div>
@@ -724,7 +940,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共58.0k字</span>
+  <span class="post-count">博客全站共61.5k字</span>
 </div>
 
         
