@@ -90,7 +90,7 @@
 <meta property="og:description" content="PHP是一种非常流行的Web开发语言。在Python、Ruby等语言兴起的今天，PHP仍然是众多开发者所喜爱的选择，在中国尤其如此。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/107.png">
-<meta property="og:updated_time" content="2018-09-02T08:51:07.612Z">
+<meta property="og:updated_time" content="2018-09-05T05:52:27.332Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP安全">
 <meta name="twitter:description" content="PHP是一种非常流行的Web开发语言。在Python、Ruby等语言兴起的今天，PHP仍然是众多开发者所喜爱的选择，在中国尤其如此。">
@@ -340,7 +340,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,442
+                  2,588
                 </span>
               
 
@@ -390,6 +390,8 @@
 <p>require()</p>
 <p>include_once()</p>
 <p>require_once()</p>
+<p><code>include</code>和<code>require</code>区别主要是，<code>include</code>在包含的过程中如果出现错误，会抛出一个警告，程序继续正常运行；而<code>require</code>函数出现错误的时候，会直接报错并退出程序的执行。</p>
+<p>而<code>include_once()</code>，<code>require_once()</code>这两个函数，与前两个的不同之处在于这两个函数只包含一次，适用于在脚本执行期间同一个文件有可能被包括超过一次的情况下，你想确保它只被包括一次以避免函数重定义，变量重新赋值等问题。</p>
 <p>当使用这4个函数包含一个新的文件时，该文件将作为PHP代码执行，PHP内核并不会在意该被包含的文件是什么类型。所以如果被包含的是txt文件、图片文件、远程URL，也都将作为PHP代码执行。这一特性，在实施攻击时将非常有用。</p>
 <h3 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h3><ul>
 <li>执行恶意代码</li>
@@ -598,7 +600,7 @@ allow_url_include = Off
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -609,7 +611,7 @@ allow_url_include = Off
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -620,7 +622,7 @@ allow_url_include = Off
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -705,7 +707,7 @@ allow_url_include = Off
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共61.5k字</span>
+  <span class="post-count">博客全站共64.9k字</span>
 </div>
 
         
